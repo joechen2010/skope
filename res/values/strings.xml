@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Skope</string>
+    <!-- DEBUG <string name="maps_api_key">0C3qD704heE7tJLoDlJFfMgTBhd453_mAxwsosw</string> -->
+    <!-- PRIVATE --><string name="maps_api_key">0C3qD704heE6cUdySBC0j5xKSlqJDg-fuQR9_tA</string> 
+    <string name="service_description">Skope location service</string>
+    <string name="public_beta">This is a public beta release. Please send us your feedback if you have any problems or good ideas. http://sko.pe/feedback</string>
+    <string name="main_no_items">Nothing found</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="quit">Quit</string>
+    <string name="really_quit">Quit</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="at">at</string>
+    <string name="send">Send</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="retrieving_data">Please wait…</string>
+    <string name="login_update_title">Update Skope</string>
+    <string name="login_update_message">There is an update available for Skope. Please download and install the latest version.</string>
+    <string name="login_update_ok">Update</string>
+    <string name="error_server_error">Sorry, there was a server error. We\&apos;re on it.</string>
+    <string name="error_connection_failed">Please make sure you are connected to the internet.</string>
+    <string name="error_username_password">Invalid username or password</string>
+    <string name="error_image_upload_not_found">Sorry, image upload failed</string>
+    <string name="error_profile_picture_result">There was a problem saving your new profile picture.</string>
+    <string name="no_location_message">It seems the application cannot determine your location. It might take a while to receive the most recent location, please try again later.</string>
+    <string name="no_location_message_disabled">It seems the location services on this device are disabled. Skope needs your location to find objects of interest in your area. Please enable one of the location services in your device settings.</string>
+    <string name="no_location_title">No location</string>
+    <string name="no_location_ok">Open settings</string>
+    <string name="no_result_message">There seems to be a problem with connecting to the server.</string>
+    <string name="no_result_title">No server response&#8230;</string>
+    <string name="menu_user">User</string>
+    <string name="menu_range">Skope range</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_phone_number">Phone number</string>
+    <string name="location_service_stopped">Skope location service stopped</string>
+    <string name="location_service_started">Skope service running&#8230;</string>
+    <string name="location_service_label">Skope</string>
+    <string name="button_label_listview">List</string>
+    <string name="button_label_mapview">Map</string>
+    <string name="login_button_login">Login</string>
+    <string name="login_button_signup">Sign up</string>
+    <string name="login_hint_user">Email</string>
+    <string name="login_hint_password">Password</string>
+    <string name="mystore_password">g3h31m</string>
+    <string name="prefs_gps_title">Use GPS</string>
+    <string name="prefs_gps_summary">Let the Skope location service make use of GPS (more accurate, but heavier battery usage)</string>
+    <string name="prefs_gps_global_title">GPS</string>
+    <string name="prefs_gps_global_on">GPS on this device is currently enabled. Click here to change.</string>
+    <string name="prefs_gps_global_off">GPS on this device is currently disabled. Click here to change.</string>
+    <string name="home_status_empty">Tap to update your status&#8230;</string>
+    <string name="signup_title">Create a Skope account</string>
+    <string name="signup_hint_email">Email</string>
+    <string name="signup_hint_password">Password</string>
+    <string name="signup_hint_confirm">Confirm</string>
+    <string name="signup_email_text">Will never be published or shared</string>
+    <string name="signup_button_signup">Sign up</string>
+    <string name="signup_validation_required_fields">Please fill out all the fields</string>
+    <string name="take_with_camera">Take with camera</string>
+    <string name="choose_camera">Select camera</string>
+    <string name="select_from_gallery">Select from gallery</string>
+    <string name="choose_gallery">Select media source</string>
+    <string name="user_form_first_name">First name</string>
+    <string name="user_form_last_name">Last name</string>
+    <string name="user_form_date_of_birth">What\&apos;s your birthday?</string>
+    <string name="user_form_home_town">Home town</string>
+    <string name="user_form_work">Where do you work?</string>
+    <string name="user_form_work_job_title">Job title</string>
+    <string name="user_form_work_company">Company</string>
+    <string name="user_form_education">What\&apos;s your education?</string>
+    <string name="user_form_education_study">Studied</string>
+    <string name="user_form_education_college">College</string>
+    <string name="user_form_show_profile">Show in profile</string>
+    <string name="user_form_relationship">Relationship status:</string>
+    <string-array name="user_relationship_choices">
+        <item>Single</item>
+        <item>In a relationship</item>
+        <item>Engaged</item>
+        <item>Married</item>
+        <item>Separated</item>
+        <item>Divorced</item>
+        <item>Widowed</item>
+        <item>In a civil union</item>
+        <item>In a domestic partnership</item>
+    </string-array>
+    <string name="user_gender_male">Male</string>
+    <string name="user_gender_female">Female</string>
+    <string-array name="user_gender_choices">
+        <item>@string/user_gender_male</item>
+        <item>@string/user_gender_female</item>
+    </string-array>
+    <string name="user_form_gender">I\&apos;m</string>
+    <string name="user_about_me">About me</string>
+    <string name="user_thumbnail_add">Set your profile picture&#8230;</string>
+    <string name="edit">Edit profile</string>
+    <string name="user_profile_uploading_image">Uploading image&#8230;</string>
+    <string name="user_photos_retrieving">Retrieving user photos&#8230;</string>
+    <string name="user_photos_add">Add photo</string>
+    <string name="user_photos_none">No photos added yet</string>
+    <string name="crash_toast_text">Unfortunately Skope just crashed. Please send us the crash report so we can fix things.</string>
+    <string name="favorites">Favorites</string>
+    <string name="photos">Photos</string>
+    <string name="user_favorite_confirm_remove_title">Remove favorite</string>
+    <string name="user_favorite_confirm_remove_message">Are you sure you want to remove %s from your favorites?</string>
+    <string name="user_favorite_confirm_add_title">Add favorite</string>
+    <string name="user_favorite_confirm_add_message">Add %s to your favorites?</string>
+    <string name="user_report_title">Report user</string>
+    <string name="user_report_message">If you have found %s to behave inappropriately, please let us know and we will take immediate action.</string>
+    <string name="facebook_connect_confirm_title">Connect with Facebook?</string>
+    <string name="facebook_connect_confirm_message">Facebook Connect will make use of your Facebook profile information and profile picture and place occasional updates on your wall. Proceed?</string>
+    <string name="facebook_disconnect_confirm_title">Disconnect from Facebook?</string>
+    <string name="facebook_disconnect_confirm_message">This will stop Skope from accessing your profile information and placing updates on your wall. Your current profile information will go unchanged. Proceed?</string>
+    <string name="message_received">You have received a message</string>
+</resources>

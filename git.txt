@@ -1,0 +1,4 @@
+$ git config --global http.proxy http://cngzip01.mgmt.ericsson.se:8080
+$ git config --system http.sslcainfo /bin/curl-ca-bundle.crt
+$ git remote add origin http://git@github.com:joechen2010/skope.git
+$ git push origin master

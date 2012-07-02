@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item>
+    <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <stroke
+        android:width="2dip"
+        android:color="@color/skope_grey_dark"/>
+    <solid android:color="@color/skope_grey"/>
+    <padding android:left="2dip"
+        android:top="2dip"
+        android:right="2dip"
+        android:bottom="2dip" />
+</shape>
+</item>
+<item android:drawable="@drawable/empty_profile_large_icon"/>
+</layer-list>

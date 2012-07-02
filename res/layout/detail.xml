@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detail_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:orientation="horizontal"
+        android:weightSum="4" >
+
+        <include
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            layout="@layout/detail_button_back" >
+        </include>
+
+        <include
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            layout="@layout/detail_button_report" >
+        </include>
+
+        <include
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            layout="@layout/detail_button_favorite" >
+        </include>
+
+        <include
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            layout="@layout/detail_button_chat" >
+        </include>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/skope_grey_extra_dark" >
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/silver" >
+
+        <include layout="@layout/ooi_profile" />
+
+        <SlidingDrawer
+            android:id="@+id/mapSlidingDrawer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:content="@+id/map_container"
+            android:handle="@+id/map_slider"
+            android:topOffset="200dip" >
+
+            <include
+                android:id="@+id/map_slider"
+                layout="@layout/detail_map_slider" />
+
+            <FrameLayout
+                android:id="@+id/map_container"
+                android:layout_height="match_parent"
+                android:layout_width="fill_parent" >
+            </FrameLayout>
+
+            <!--
+                 <include
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                layout="@layout/map" />
+            -->
+        </SlidingDrawer>
+
+        <!-- Listens to touch events for navigation buttons -->
+
+        <FrameLayout
+            android:id="@+id/overlay"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null" >
+        </FrameLayout>
+    </FrameLayout>
+
+</LinearLayout>

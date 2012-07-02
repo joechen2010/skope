@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/user_profile"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/silver" >
+
+    <LinearLayout
+        android:id="@+id/user_profile_main"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|bottom"
+                    android:minHeight="60dip"
+                    android:paddingBottom="5dip"
+                    android:paddingLeft="120dip"
+                    android:paddingRight="10dip"
+                    android:paddingTop="5dip"
+                    android:text=""
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/username_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/header_gradient"
+                    android:minHeight="60dip"
+                    android:paddingBottom="5dip"
+                    android:paddingLeft="120dip"
+                    android:paddingRight="10dip"
+                    android:paddingTop="5dip"
+                    android:text="Firstname Lastname"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:paddingBottom="10dip"
+                android:paddingLeft="10dip" >
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="100dip"
+                    android:layout_height="100dip"
+                    android:background="@drawable/thumbnail_box_white"
+                    android:scaleType="fitXY" />
+            </FrameLayout>
+        </FrameLayout>
+
+        <include layout="@layout/user_info_block" />
+        
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="@color/skope_grey"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip">
+            
+        </FrameLayout>
+
+	    <ListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:listSelector="@drawable/list_selector"
+            android:cacheColorHint="#00000000"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip">
+        </ListView>
+        
+	    <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="@color/skope_grey"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip">
+            
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/nav_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|right"
+        android:layout_margin="10dip"
+        android:background="#20000000"
+        android:padding="20dip" >
+
+        <ImageView
+            android:id="@+id/nav_arrow_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nav_arrow_right" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/nav_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|left"
+        android:layout_margin="10dip"
+        android:background="#20000000"
+        android:padding="20dip" >
+
+        <ImageView
+            android:id="@+id/nav_arrow_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nav_arrow_left" />
+    </FrameLayout>
+
+</FrameLayout>
