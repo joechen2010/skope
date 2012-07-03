@@ -120,7 +120,7 @@ public class ImageUploader {
 	 */
 	public String upload(String location, String fieldName, Uri uri) {
 		String userId = String.valueOf(mCache.getUser().getId());
-		String absoluteUrl = mCache.getProperty("service_url");
+		String absoluteUrl = mCache.getServiceUrl();
 
 		// Create HTTP client
         CustomHttpClient client = new CustomHttpClient(absoluteUrl, mContext);
@@ -170,7 +170,7 @@ public class ImageUploader {
 	 * @throws IOException
 	 */
 	public void asyncUpload(String location, String fieldName, Uri uri) {
-		String absoluteUrl = mCache.getProperty("service_url");
+		String absoluteUrl = mCache.getServiceUrl();
 		UploadRunner runner = new UploadRunner(absoluteUrl, mUsername, mPassword, fieldName);
 		runner.execute(uri);
 	}

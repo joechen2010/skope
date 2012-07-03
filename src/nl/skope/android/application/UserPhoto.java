@@ -342,7 +342,7 @@ public class UserPhoto {
 			Long userId = mCache.getUser().getId();
 			String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 			String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-			String absoluteUrl = mCache.getProperty("service_url") ;
+			String absoluteUrl = mCache.getServiceUrl();
 			
 			// Create HTTP client
 	        CustomHttpClient client = new CustomHttpClient(absoluteUrl);

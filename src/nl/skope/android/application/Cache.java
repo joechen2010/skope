@@ -434,4 +434,7 @@ public class Cache {
 		this.mIsLocationProviderAvailable = isLocationProviderAvailable;
 	}
 	
+	public String getServiceUrl(){
+		return this.getProperty("service_url");
+	}
 }

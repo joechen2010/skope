@@ -240,7 +240,7 @@ public class WorkerThread extends Thread {
 		
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = mCache.getProperty("service_url");
+		String serviceUrl = mCache.getServiceUrl();
 		
 		
 		// Set up HTTP client
@@ -328,7 +328,7 @@ public class WorkerThread extends Thread {
 
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = mCache.getProperty("service_url");
+		String serviceUrl = mCache.getServiceUrl();
 		
 		// Set up HTTP client
         CustomHttpClient client = new CustomHttpClient(serviceUrl, mLocationService.getApplicationContext());
@@ -413,7 +413,7 @@ public class WorkerThread extends Thread {
 
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = mCache.getProperty("service_url");//String.format("%s/user/%d/",								mCache.getProperty("service_url"),							userId);
+		String serviceUrl = mCache.getServiceUrl();//String.format("%s/user/%d/",								mCache.getProperty("service_url"),							userId);
 		
 		// Set up HTTP client
         CustomHttpClient client = new CustomHttpClient(serviceUrl);
@@ -462,7 +462,7 @@ public class WorkerThread extends Thread {
 		
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = mCache.getProperty("service_url");
+		String serviceUrl = mCache.getServiceUrl();
 		
 		// Set up HTTP client
         CustomHttpClient client = new CustomHttpClient(serviceUrl, mLocationService.getApplicationContext());
@@ -572,7 +572,7 @@ public class WorkerThread extends Thread {
 
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = mCache.getProperty("service_url");//String.format("%s/user/%d/chat/%d/", mCache.getProperty("service_url"),userId ,	userFromId);
+		String serviceUrl = mCache.getServiceUrl();//String.format("%s/user/%d/chat/%d/", mCache.getProperty("service_url"),userId ,	userFromId);
 		String chatAction = "";
 		if (filterUnreadMessages) {
 			chatAction += "new";
@@ -728,7 +728,7 @@ public class WorkerThread extends Thread {
 
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = mCache.getProperty("service_url");
+		String serviceUrl = mCache.getServiceUrl();
 		
 		// Set up HTTP client
         CustomHttpClient client = new CustomHttpClient(serviceUrl, mLocationService.getApplicationContext());

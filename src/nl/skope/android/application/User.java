@@ -52,7 +52,9 @@ public class User implements Parcelable {
 	
 	protected Long mId;
 	protected String mFirstName;
+	protected String mName;
 	protected String mLastName;
+	protected String mMobile;
 	protected Date mDateOfBirth;
 	protected boolean mIsDateofBirthPublic;
 	protected String mStatus;
@@ -92,7 +94,9 @@ public class User implements Parcelable {
 	public User(Parcel in) {
 		this.mId = in.readLong();
 		this.mFirstName = in.readString();
+		this.mName = in.readString();
 		this.mLastName = in.readString();
+		this.mMobile = in.readString();
 		this.mProfilePictureURL = in.readString();
 		this.mStatus = in.readString();
 		this.mIsStatusChanged = Boolean.parseBoolean(in.readString());
@@ -129,7 +133,9 @@ public class User implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeLong(this.mId);
 		dest.writeString(this.mFirstName != null ? this.mFirstName : "");
+		dest.writeString(this.mName != null ? this.mName : "");
 		dest.writeString(this.mLastName != null ? this.mLastName : "");
+		dest.writeString(this.mMobile != null ? this.mMobile : "");
 		dest.writeString(this.mProfilePictureURL != null ? this.mProfilePictureURL : "");
 		dest.writeString(this.mStatus != null ? this.mStatus : "");
 		dest.writeString(String.valueOf(this.mIsStatusChanged));
@@ -343,6 +349,13 @@ public class User implements Parcelable {
 			return "";
 		} else {
 			return mStatus.trim();
+		}
+	}
+	public String createLabelMobile() {
+		if(mMobile == null) {
+			return "";
+		} else {
+			return mMobile.trim();
 		}
 	}
 	
@@ -958,6 +971,262 @@ public class User implements Parcelable {
 
 	public void setFBProfilePictureURL(String fBProfilePictureURL) {
 		mFBProfilePictureURL = fBProfilePictureURL;
+	}
+
+	public DateFormat getmDateFormat() {
+		return mDateFormat;
+	}
+
+	public void setmDateFormat(DateFormat mDateFormat) {
+		this.mDateFormat = mDateFormat;
+	}
+
+	public Cache getmCache() {
+		return mCache;
+	}
+
+	public void setmCache(Cache mCache) {
+		this.mCache = mCache;
+	}
+
+	public Long getmId() {
+		return mId;
+	}
+
+	public void setmId(Long mId) {
+		this.mId = mId;
+	}
+
+	public String getmFirstName() {
+		return mFirstName;
+	}
+
+	public void setmFirstName(String mFirstName) {
+		this.mFirstName = mFirstName;
+	}
+
+	public String getmName() {
+		return mName;
+	}
+
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
+
+	public String getmLastName() {
+		return mLastName;
+	}
+
+	public void setmLastName(String mLastName) {
+		this.mLastName = mLastName;
+	}
+
+	public String getmMobile() {
+		return mMobile;
+	}
+
+	public void setmMobile(String mMobile) {
+		this.mMobile = mMobile;
+	}
+
+	public Date getmDateOfBirth() {
+		return mDateOfBirth;
+	}
+
+	public void setmDateOfBirth(Date mDateOfBirth) {
+		this.mDateOfBirth = mDateOfBirth;
+	}
+
+	public boolean ismIsDateofBirthPublic() {
+		return mIsDateofBirthPublic;
+	}
+
+	public void setmIsDateofBirthPublic(boolean mIsDateofBirthPublic) {
+		this.mIsDateofBirthPublic = mIsDateofBirthPublic;
+	}
+
+	public String getmStatus() {
+		return mStatus;
+	}
+
+	public void setmStatus(String mStatus) {
+		this.mStatus = mStatus;
+	}
+
+	public boolean ismIsStatusChanged() {
+		return mIsStatusChanged;
+	}
+
+	public void setmIsStatusChanged(boolean mIsStatusChanged) {
+		this.mIsStatusChanged = mIsStatusChanged;
+	}
+
+	public String getmSex() {
+		return mSex;
+	}
+
+	public void setmSex(String mSex) {
+		this.mSex = mSex;
+	}
+
+	public boolean ismIsSexPublic() {
+		return mIsSexPublic;
+	}
+
+	public void setmIsSexPublic(boolean mIsSexPublic) {
+		this.mIsSexPublic = mIsSexPublic;
+	}
+
+	public String getmProfilePictureURL() {
+		return mProfilePictureURL;
+	}
+
+	public void setmProfilePictureURL(String mProfilePictureURL) {
+		this.mProfilePictureURL = mProfilePictureURL;
+	}
+
+	public Bitmap getmProfilePicture() {
+		return mProfilePicture;
+	}
+
+	public void setmProfilePicture(Bitmap mProfilePicture) {
+		this.mProfilePicture = mProfilePicture;
+	}
+
+	public Location getmLocation() {
+		return mLocation;
+	}
+
+	public void setmLocation(Location mLocation) {
+		this.mLocation = mLocation;
+	}
+
+	public Timestamp getmLocationTimestamp() {
+		return mLocationTimestamp;
+	}
+
+	public void setmLocationTimestamp(Timestamp mLocationTimestamp) {
+		this.mLocationTimestamp = mLocationTimestamp;
+	}
+
+	public String getmRelationship() {
+		return mRelationship;
+	}
+
+	public void setmRelationship(String mRelationship) {
+		this.mRelationship = mRelationship;
+	}
+
+	public String getmHomeTown() {
+		return mHomeTown;
+	}
+
+	public void setmHomeTown(String mHomeTown) {
+		this.mHomeTown = mHomeTown;
+	}
+
+	public String getmWorkJobTitle() {
+		return mWorkJobTitle;
+	}
+
+	public void setmWorkJobTitle(String mWorkJobTitle) {
+		this.mWorkJobTitle = mWorkJobTitle;
+	}
+
+	public String getmWorkCompany() {
+		return mWorkCompany;
+	}
+
+	public void setmWorkCompany(String mWorkCompany) {
+		this.mWorkCompany = mWorkCompany;
+	}
+
+	public String getmEducationStudy() {
+		return mEducationStudy;
+	}
+
+	public void setmEducationStudy(String mEducationStudy) {
+		this.mEducationStudy = mEducationStudy;
+	}
+
+	public String getmEducationCollege() {
+		return mEducationCollege;
+	}
+
+	public void setmEducationCollege(String mEducationCollege) {
+		this.mEducationCollege = mEducationCollege;
+	}
+
+	public String getmInterests() {
+		return mInterests;
+	}
+
+	public void setmInterests(String mInterests) {
+		this.mInterests = mInterests;
+	}
+
+	public boolean ismIsFirstTime() {
+		return mIsFirstTime;
+	}
+
+	public void setmIsFirstTime(boolean mIsFirstTime) {
+		this.mIsFirstTime = mIsFirstTime;
+	}
+
+	public boolean ismIsFacebookConnect() {
+		return mIsFacebookConnect;
+	}
+
+	public void setmIsFacebookConnect(boolean mIsFacebookConnect) {
+		this.mIsFacebookConnect = mIsFacebookConnect;
+	}
+
+	public String getmFBProfilePictureURL() {
+		return mFBProfilePictureURL;
+	}
+
+	public void setmFBProfilePictureURL(String mFBProfilePictureURL) {
+		this.mFBProfilePictureURL = mFBProfilePictureURL;
+	}
+
+	public ArrayList<Long> getmFavorites() {
+		return mFavorites;
+	}
+
+	public void setmFavorites(ArrayList<Long> mFavorites) {
+		this.mFavorites = mFavorites;
+	}
+
+	public boolean ismHasNoProfilePicture() {
+		return mHasNoProfilePicture;
+	}
+
+	public void setmHasNoProfilePicture(boolean mHasNoProfilePicture) {
+		this.mHasNoProfilePicture = mHasNoProfilePicture;
+	}
+
+	public String getmLastChatMessage() {
+		return mLastChatMessage;
+	}
+
+	public void setmLastChatMessage(String mLastChatMessage) {
+		this.mLastChatMessage = mLastChatMessage;
+	}
+
+	public int getmNrUnreadMessages() {
+		return mNrUnreadMessages;
+	}
+
+	public void setmNrUnreadMessages(int mNrUnreadMessages) {
+		this.mNrUnreadMessages = mNrUnreadMessages;
+	}
+
+	public float getmDistance() {
+		return mDistance;
+	}
+
+	public void setmDistance(float mDistance) {
+		this.mDistance = mDistance;
 	}
 	
 	
