@@ -2,14 +2,14 @@ package nl.skope.android.ui;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
-import nl.skope.android.application.Cache;
+import nl.skope.android.R;
 import nl.skope.android.application.SkopeApplication;
-import nl.skope.android.application.UserPhoto;
 import nl.skope.android.http.CustomHttpClient;
 import nl.skope.android.http.CustomHttpClient.RequestMethod;
+import nl.skope.android.util.APIAction;
+import nl.skope.android.util.UUIDUtils;
 
 import org.apache.http.HttpStatus;
 import org.json.JSONArray;
@@ -38,8 +38,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import nl.skope.android.R;
-
 public class UserSignupActivity extends BaseActivity {
 	private static final String TAG = UserSignupActivity.class.getSimpleName();
 	private static String VALIDATION_MESSAGE_REQUIRED = "This field is required.";
@@ -60,7 +58,7 @@ public class UserSignupActivity extends BaseActivity {
 
 	private class SignupTask extends AsyncTask<UserSignupForm, Void, CustomHttpClient> {
 		private ProgressDialog dialog = new ProgressDialog(UserSignupActivity.this);
-		private String mURL = getCache().getProperty("skope_service_url") + "signup/";
+		private String mURL = getCache().getProperty("service_url") ;
 		private UserSignupForm mForm;
 
 		// can use UI thread here
@@ -75,6 +73,7 @@ public class UserSignupActivity extends BaseActivity {
 
 			// Add POST parameters
 			mForm = args[0];
+			client.addHeader("action", APIAction.SIGNUP.getName());
 			client.addParam("email", mForm.email.toLowerCase());
 			client.addParam("password1", mForm.password1);
 			client.addParam("password2", mForm.password2);
@@ -82,6 +81,7 @@ public class UserSignupActivity extends BaseActivity {
 			client.addParam("last_name", mForm.lastName);
 			client.addParam("date_of_birth", mForm.dateOfBirth);
 			client.addParam("gender", mForm.gender);
+			client.addParam("id", UUIDUtils.generate().toString());
 
 			// Send HTTP request to web service
 			try {

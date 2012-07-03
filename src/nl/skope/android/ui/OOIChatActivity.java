@@ -150,7 +150,7 @@ public class OOIChatActivity extends BaseActivity {
 	    case R.id.signout:
 	    	getServiceQueue().stopService();
 	    	getCache().setUserSignedOut(true);
-	    	String logoutURL = getCache().getProperty("skope_service_url") + "/logout/";
+	    	String logoutURL = getCache().getProperty("service_url");
 	    	String username = getCache().getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 	    	String password = getCache().getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
 	    	new LogoutTask().execute(this, logoutURL, username, password);
@@ -206,7 +206,7 @@ public class OOIChatActivity extends BaseActivity {
 	protected void requestChatMessagesUpdate() {
 		if (mUser != null && checkCacheSanity()) {
 			Bundle bundle = new Bundle();
-			bundle.putInt(SkopeApplication.BUNDLEKEY_USERID, mUser.getId());
+			bundle.putLong(SkopeApplication.BUNDLEKEY_USERID, mUser.getId());
 			bundle.putBoolean(SkopeApplication.BUNDLEKEY_CHAT_MARKASREAD, true);
 			getServiceQueue().postToService(Type.READ_USER_CHAT_MESSAGES, bundle);
 		}		
@@ -260,13 +260,13 @@ public class OOIChatActivity extends BaseActivity {
 		// Check that there's actually something to send
 		if (message.length() > 0) {
 			// Bundle present, extract mId
-	    	int userId = getCache().getUser().getId();
-			int userToId = mUser.getId();
+	    	Long userId = getCache().getUser().getId();
+			Long userToId = mUser.getId();
 
 			String username = getCache().getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 			String password = getCache().getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
 			String url = String.format("%s/user/%d/chat/%d/", 
-								getCache().getProperty("skope_service_url"),
+								getCache().getProperty("service_url"),
 								userId ,
 								userToId);
 			// Send message
@@ -383,7 +383,7 @@ public class OOIChatActivity extends BaseActivity {
 				if (mUser != null) {
 					NotificationManager notificationManager =
 						(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-					notificationManager.cancel(SkopeApplication.NOTIFICATION_CHATMESSAGE, mUser.getId());
+					notificationManager.cancel(SkopeApplication.NOTIFICATION_CHATMESSAGE, mUser.getId().intValue());
 				}
 				
 			}
@@ -407,7 +407,7 @@ public class OOIChatActivity extends BaseActivity {
 			if (userId == mUser.getId()) {
 				// Match, request update
 				Bundle bundle = new Bundle();
-				bundle.putInt(SkopeApplication.BUNDLEKEY_USERID, mUser.getId());
+				bundle.putLong(SkopeApplication.BUNDLEKEY_USERID, mUser.getId());
 				bundle.putBoolean(SkopeApplication.BUNDLEKEY_CHAT_UNREAD, true);
 				bundle.putBoolean(SkopeApplication.BUNDLEKEY_CHAT_MARKASREAD, true);
 				getServiceQueue().postToService(Type.READ_USER_CHAT_MESSAGES, bundle);

@@ -7,6 +7,7 @@ import nl.skope.android.application.SkopeApplication;
 import nl.skope.android.application.UiQueue;
 import nl.skope.android.http.CustomHttpClient;
 import nl.skope.android.http.CustomHttpClient.RequestMethod;
+import nl.skope.android.util.APIAction;
 import nl.skope.android.util.Type;
 
 import org.apache.http.HttpStatus;
@@ -155,7 +156,7 @@ public class MainTabActivity extends TabActivity {
 	    case R.id.signout:
 	    	mApplication.getServiceQueue().stopService();
 	    	mCache.setUserSignedOut(true);
-	    	String logoutURL = mCache.getProperty("skope_service_url") + "/logout/";
+	    	String logoutURL = mCache.getProperty("service_url");
 	    	String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 	    	String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
 	    	new LogoutTask().execute(this, logoutURL, username, password);
@@ -221,14 +222,12 @@ public class MainTabActivity extends TabActivity {
 	};
 	
 	public void updateChatNotification() {
-		int userId = mCache.getUser().getId();
+		Long userId = mCache.getUser().getId();
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String url = String.format("%s/user/%d/chat/?count&new", 
-							mCache.getProperty("skope_service_url"),
-							userId);
+		String url = mCache.getProperty("service_url");//String.format("%s/user/%d/chat/?count&new",mCache.getProperty("skope_service_url"),userId);
 		// Send message
-		new RetrieveNrUnreadMessages().execute(url, username, password);
+		new RetrieveNrUnreadMessages().execute(url, username, password,userId.toString());
 	}
 	
 	protected class RetrieveNrUnreadMessages extends AsyncTask<String, Void, CustomHttpClient> {
@@ -238,7 +237,9 @@ public class MainTabActivity extends TabActivity {
 			CustomHttpClient client = new CustomHttpClient(params[0]);
 			client.setUseBasicAuthentication(true);
 			client.setUsernamePassword(params[1], params[2]);
-			
+			client.addParam("id", String.valueOf(params[3]));
+	        client.addParam("chatAction", "count&new");
+	        client.addParam("action", APIAction.CHAT.getName());
 			// Send HTTP request to web service
 			try {
 				client.execute(RequestMethod.GET);

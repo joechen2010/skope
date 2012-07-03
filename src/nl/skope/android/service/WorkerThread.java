@@ -22,7 +22,6 @@ import java.util.List;
 
 import nl.skope.android.R;
 import nl.skope.android.application.Cache;
-import nl.skope.android.application.User;
 import nl.skope.android.application.ObjectOfInterestList;
 import nl.skope.android.application.SkopeApplication;
 import nl.skope.android.application.UiQueue;
@@ -31,6 +30,7 @@ import nl.skope.android.application.UserPhoto;
 import nl.skope.android.http.CustomHttpClient;
 import nl.skope.android.http.CustomHttpClient.RequestMethod;
 import nl.skope.android.http.ImageUploader;
+import nl.skope.android.util.APIAction;
 import nl.skope.android.util.NotificationUtils;
 import nl.skope.android.util.Type;
 
@@ -240,7 +240,8 @@ public class WorkerThread extends Thread {
 		
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = mCache.getProperty("skope_service_url") + "/skope/";
+		String serviceUrl = mCache.getProperty("service_url");
+		
 		
 		// Set up HTTP client
         CustomHttpClient client = new CustomHttpClient(serviceUrl, mLocationService.getApplicationContext());
@@ -250,7 +251,7 @@ public class WorkerThread extends Thread {
         client.addParam("lat", String.valueOf(currentLocation.getLatitude()));
         client.addParam("lng", String.valueOf(currentLocation.getLongitude()));
         client.addParam("status_message", mCache.getUser().getStatus());
-         
+        client.addParam("action", APIAction.MAIN.getName());
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.GET);
@@ -327,13 +328,14 @@ public class WorkerThread extends Thread {
 
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = mCache.getProperty("skope_service_url") + "/user/" + userId + "/favorites/";
+		String serviceUrl = mCache.getProperty("service_url");
 		
 		// Set up HTTP client
         CustomHttpClient client = new CustomHttpClient(serviceUrl, mLocationService.getApplicationContext());
         client.setUseBasicAuthentication(true);
         client.setUsernamePassword(username, password);
-        
+        client.addParam("id", String.valueOf(userId));
+        client.addParam("action", APIAction.FAVORITES.getName());
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.GET);
@@ -411,15 +413,14 @@ public class WorkerThread extends Thread {
 
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = String.format("%s/user/%d/", 
-								mCache.getProperty("skope_service_url"),
-								userId);
+		String serviceUrl = mCache.getProperty("service_url");//String.format("%s/user/%d/",								mCache.getProperty("service_url"),							userId);
 		
 		// Set up HTTP client
         CustomHttpClient client = new CustomHttpClient(serviceUrl);
         client.setUseBasicAuthentication(true);
         client.setUsernamePassword(username, password);
-        
+        client.addParam("id", String.valueOf(userId));
+        client.addParam("action", APIAction.READUSER.getName());
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.GET);
@@ -461,13 +462,14 @@ public class WorkerThread extends Thread {
 		
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = mCache.getProperty("skope_service_url") + "/user/" + userId + "/chat/";
+		String serviceUrl = mCache.getProperty("service_url");
 		
 		// Set up HTTP client
         CustomHttpClient client = new CustomHttpClient(serviceUrl, mLocationService.getApplicationContext());
         client.setUseBasicAuthentication(true);
         client.setUsernamePassword(username, password);
-        
+        client.addParam("id", String.valueOf(userId));
+        client.addParam("action", APIAction.CHAT.getName());
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.GET);
@@ -544,7 +546,7 @@ public class WorkerThread extends Thread {
     	mUiQueue.postToUi(Type.READ_USER_CHAT_MESSAGES_START, null, true);
     	
 		// Bundle present, extract mId
-    	int userId = mCache.getUser().getId();
+    	Long userId = mCache.getUser().getId();
 		int userFromId = bundle.getInt(SkopeApplication.BUNDLEKEY_USERID);
 
 		// Check for 'unread' flag
@@ -570,36 +572,33 @@ public class WorkerThread extends Thread {
 
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = String.format("%s/user/%d/chat/%d/", 
-								mCache.getProperty("skope_service_url"),
-								userId ,
-								userFromId);
-		
+		String serviceUrl = mCache.getProperty("service_url");//String.format("%s/user/%d/chat/%d/", mCache.getProperty("service_url"),userId ,	userFromId);
+		String chatAction = "";
 		if (filterUnreadMessages) {
-			serviceUrl += "?new";
+			chatAction += "new";
 		}
 		
 		if (markAsRead) {
 			if (filterUnreadMessages) {
-				serviceUrl += "&mark_as_read";
+				chatAction += "mark_as_read";
 			} else {
-				serviceUrl += "?mark_as_read";
+				chatAction += "mark_as_read";
 			}
 		}
 		
 		if (filterFrom) {
 			if (filterUnreadMessages || markAsRead) {
-				serviceUrl += "&from";				
+				chatAction += "from";				
 			} else {
-				serviceUrl += "?from";
+				chatAction += "from";
 			}
 		}
 		
 		if (lastMessage) {
 			if (filterUnreadMessages || markAsRead || filterFrom) {
-				serviceUrl += "&last";
+				chatAction += "last";
 			} else {
-				serviceUrl += "?last";
+				chatAction += "last";
 			}
 		}
 		
@@ -607,7 +606,9 @@ public class WorkerThread extends Thread {
         CustomHttpClient client = new CustomHttpClient(serviceUrl, mLocationService.getApplicationContext());
         client.setUseBasicAuthentication(true);
         client.setUsernamePassword(username, password);
-        
+        client.addParam("id", String.valueOf(userId));
+        client.addParam("chatAction", chatAction);
+        client.addParam("action", APIAction.CHAT.getName());
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.GET);
@@ -727,13 +728,14 @@ public class WorkerThread extends Thread {
 
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = mCache.getProperty("skope_service_url") + "/user/" + userId + "/photos/";
+		String serviceUrl = mCache.getProperty("service_url");
 		
 		// Set up HTTP client
         CustomHttpClient client = new CustomHttpClient(serviceUrl, mLocationService.getApplicationContext());
         client.setUseBasicAuthentication(true);
         client.setUsernamePassword(username, password);
-        
+        client.addParam("id", String.valueOf(userId));
+        client.addParam("action", APIAction.PHOTOS.getName());
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.GET);

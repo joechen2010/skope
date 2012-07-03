@@ -7,6 +7,7 @@ import nl.skope.android.application.SkopeApplication;
 import nl.skope.android.application.User;
 import nl.skope.android.http.CustomHttpClient;
 import nl.skope.android.http.CustomHttpClient.RequestMethod;
+import nl.skope.android.util.APIAction;
 import nl.skope.android.util.Type;
 import nl.skope.android.util.Utility;
 
@@ -137,7 +138,7 @@ public class LoginActivity extends BaseActivity {
     }
 	
 	private int login(String username, String password) {
-		final String loginUrl = getCache().getProperty("skope_service_url") + "/login/";
+		final String loginUrl = getCache().getProperty("service_url");
 		
 		// Set up HTTP client with url as argument
         CustomHttpClient client = new CustomHttpClient(loginUrl);
@@ -146,6 +147,7 @@ public class LoginActivity extends BaseActivity {
         try {
         	int versionCode = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA).versionCode;
 			client.addParam("version_code", String.valueOf(versionCode));
+			client.addParam("action", APIAction.LOGIN.getName());
 		} catch (NameNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -207,7 +209,7 @@ public class LoginActivity extends BaseActivity {
     	SharedPreferences.Editor editor = mPreferences.edit();
     	editor.putString(SkopeApplication.PREFS_USERNAME, mUsername);
     	editor.putString(SkopeApplication.PREFS_PASSWORD, mPassword);
-    	editor.putInt(SkopeApplication.PREFS_USERID, user.getId());
+    	editor.putLong(SkopeApplication.PREFS_USERID, user.getId());
     	
     	// Store preference defaults
         editor.putBoolean(SkopeApplication.PREFS_GPSENABLED, false);
@@ -215,7 +217,7 @@ public class LoginActivity extends BaseActivity {
 
     	// Retrieve favorites
         Bundle favoritesBundle = new Bundle();
-        favoritesBundle.putInt(SkopeApplication.BUNDLEKEY_USERID, user.getId());
+        favoritesBundle.putLong(SkopeApplication.BUNDLEKEY_USERID, user.getId());
 		getServiceQueue().postToService(Type.READ_USER_FAVORITES, favoritesBundle);
 		
 		// Set flag
@@ -284,7 +286,7 @@ public class LoginActivity extends BaseActivity {
 			        .setMessage(getResources().getString(R.string.login_update_message))
 			        .setPositiveButton(getResources().getString(R.string.login_update_ok), new DialogInterface.OnClickListener() {
 			            public void onClick(DialogInterface dialog, int whichButton) {
-			            	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://sko.pe/downloads/android-latest.apk"));
+			            	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getCache().getProperty("upgrade_url")));
 			            	startActivity(browserIntent);
 			            }
 			        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -294,11 +296,11 @@ public class LoginActivity extends BaseActivity {
 			        }).show();
 		        	break;
 		        case 431: // EMAIL NOT VERIFIED
-		        	Toast.makeText(LoginActivity.this, "Please verify you email address", Toast.LENGTH_SHORT).show();
+		        	Toast.makeText(LoginActivity.this, "Please verify you email address and password", Toast.LENGTH_SHORT).show();
 		        	break;
-		        case HttpStatus.SC_PAYMENT_REQUIRED:
+		        /*case HttpStatus.SC_PAYMENT_REQUIRED:
 		        	Toast.makeText(LoginActivity.this, "You have a payment due", Toast.LENGTH_SHORT).show();
-		        	break;
+		        	break;*/
 		        }
 		        return false;
     		}

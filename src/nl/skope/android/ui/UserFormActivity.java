@@ -11,6 +11,7 @@ import nl.skope.android.application.User;
 import nl.skope.android.application.UserPhoto;
 import nl.skope.android.http.CustomHttpClient;
 import nl.skope.android.http.CustomHttpClient.RequestMethod;
+import nl.skope.android.util.APIAction;
 
 import org.apache.http.HttpStatus;
 import org.json.JSONArray;
@@ -58,10 +59,10 @@ public class UserFormActivity extends BaseActivity {
 		}
 
 		protected CustomHttpClient doInBackground(Object... args) {
-			int userId = getCache().getUser().getId();
+			Long userId = getCache().getUser().getId();
 			String username = (String) args[0];
 			String password = (String) args[1];
-			String serviceUrl = getCache().getProperty("skope_service_url") + "/user/" + userId + "/";
+			String serviceUrl = getCache().getProperty("service_url");
 			
 			// Set up HTTP client
 	        CustomHttpClient client = new CustomHttpClient(serviceUrl, getApplicationContext());
@@ -70,6 +71,8 @@ public class UserFormActivity extends BaseActivity {
 	        
 			// Add POST parameters
 			UserForm form = (UserForm) args[2];
+			client.addParam("action", APIAction.INFO.getName());
+			client.addParam("id", userId.toString());
 			client.addParam("first_name", form.firstName);
 			client.addParam("last_name", form.lastName);
 			client.addParam("date_of_birth", form.dateOfBirth);

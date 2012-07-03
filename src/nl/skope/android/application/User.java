@@ -17,7 +17,6 @@ import java.util.GregorianCalendar;
 import nl.skope.android.R;
 import nl.skope.android.http.CustomHttpClient.FlushedInputStream;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -51,7 +50,7 @@ public class User implements Parcelable {
 	
 	private Cache mCache;
 	
-	protected int mId;
+	protected Long mId;
 	protected String mFirstName;
 	protected String mLastName;
 	protected Date mDateOfBirth;
@@ -74,7 +73,7 @@ public class User implements Parcelable {
 	protected boolean mIsFirstTime;
 	protected boolean mIsFacebookConnect;
 	protected String mFBProfilePictureURL;	
-	protected ArrayList<Integer> mFavorites = new ArrayList<Integer>();
+	protected ArrayList<Long> mFavorites = new ArrayList<Long>();
 	
 	protected boolean mHasNoProfilePicture;
 	
@@ -91,7 +90,7 @@ public class User implements Parcelable {
 	}
 	
 	public User(Parcel in) {
-		this.mId = in.readInt();
+		this.mId = in.readLong();
 		this.mFirstName = in.readString();
 		this.mLastName = in.readString();
 		this.mProfilePictureURL = in.readString();
@@ -128,7 +127,7 @@ public class User implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(this.mId);
+		dest.writeLong(this.mId);
 		dest.writeString(this.mFirstName != null ? this.mFirstName : "");
 		dest.writeString(this.mLastName != null ? this.mLastName : "");
 		dest.writeString(this.mProfilePictureURL != null ? this.mProfilePictureURL : "");
@@ -163,7 +162,7 @@ public class User implements Parcelable {
     };
     
     public User(JSONObject jsonObject) throws JSONException {
-    	this.setId(jsonObject.getInt("id"));
+    	this.setId(jsonObject.getLong("id"));
 		
     	JSONObject user = jsonObject.getJSONObject("user");
 		if (!user.isNull("first_name")) {
@@ -273,10 +272,10 @@ public class User implements Parcelable {
 		
 		// Favorites
 		if (!jsonObject.isNull("favorites")) {
-			this.mFavorites = new ArrayList<Integer>();
-			JSONArray favorites = jsonObject.getJSONArray("favorites");
-			for (int i=0; i<favorites.length(); i++) {
-				this.mFavorites.add(favorites.getInt(i));				
+			this.mFavorites = new ArrayList<Long>();
+			String[] favorites = jsonObject.getString("favorites").split(",");
+			for (int i=0; i<favorites.length; i++) {
+				this.mFavorites.add(Long.valueOf(favorites[i]));				
 			}
 		}
 	}
@@ -290,7 +289,7 @@ public class User implements Parcelable {
 	 * Determines whether given User is favorite of current User
 	 */
 	public boolean isFavorite(User user) {
-		for (int favorite: mFavorites) {
+		for (long favorite: mFavorites) {
 			if (favorite == user.getId()) {
 				return true;
 			}
@@ -852,11 +851,11 @@ public class User implements Parcelable {
 		this.mWorkCompany = workCompany;
 	}
 
-	public ArrayList<Integer> getFavorites() {
+	public ArrayList<Long> getFavorites() {
 		return mFavorites;
 	}
 
-	public void setFavorites(ArrayList<Integer> favorites) {
+	public void setFavorites(ArrayList<Long> favorites) {
 		this.mFavorites = favorites;
 	}
 	
@@ -913,12 +912,12 @@ public class User implements Parcelable {
 		}
 	}
 
-	public int getId() {
+	public Long getId() {
 		return mId;
 	}
 
-	public void setId(int id) {
-		this.mId = id;
+	public void setId(Long mId) {
+		this.mId = mId;
 	}
 
 	public boolean isStatusChanged() {
@@ -960,5 +959,6 @@ public class User implements Parcelable {
 	public void setFBProfilePictureURL(String fBProfilePictureURL) {
 		mFBProfilePictureURL = fBProfilePictureURL;
 	}
+	
 	
 }

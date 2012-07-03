@@ -12,6 +12,7 @@ import nl.skope.android.http.CustomHttpClient;
 import nl.skope.android.http.CustomHttpClient.RequestMethod;
 import nl.skope.android.maps.SkopeMapView;
 import nl.skope.android.maps.UserOverlay;
+import nl.skope.android.util.APIAction;
 import nl.skope.android.util.Type;
 
 import org.apache.http.HttpStatus;
@@ -130,14 +131,14 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 								@Override
 								public void onTaskDone(boolean isSuccess, String message) {
 									if (isSuccess) {
-										getCache().getUser().getFavorites().remove(new Integer(mSelectedOOI.getId()));
+										getCache().getUser().getFavorites().remove(new Long(mSelectedOOI.getId()));
 										mFavoriteIcon.setBackgroundResource(R.drawable.detail_button_favorite_selector);
 									} else {
 										Toast.makeText(OOIDetailMapActivity.this, "Sorry, please try again", Toast.LENGTH_SHORT).show();
 									}
 								}
 							});
-							runner.execute(mSelectedOOI.getId());
+							runner.execute(mSelectedOOI.getId().intValue());
 			            }
 			        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 			            public void onClick(DialogInterface dialog, int whichButton) {
@@ -170,7 +171,7 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 									}
 								}
 							});
-							runner.execute(mSelectedOOI.getId());
+							runner.execute(mSelectedOOI.getId().intValue());
 			            }
 			        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 			            public void onClick(DialogInterface dialog, int whichButton) {
@@ -406,7 +407,7 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 	    case R.id.signout:
 	    	mServiceQueue.stopService();
 	    	mCache.setUserSignedOut(true);
-	    	String logoutURL = mCache.getProperty("skope_service_url") + "/logout/";
+	    	String logoutURL = mCache.getProperty("service_url") ;
 	    	String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 	    	String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
 	    	new LogoutTask().execute(this, logoutURL, username, password);
@@ -450,12 +451,12 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 		Cache.USER_PHOTOS.clear();
 		// Read photos
 		Bundle photosBundle = new Bundle();
-        photosBundle.putInt(SkopeApplication.BUNDLEKEY_USERID, mSelectedOOI.getId());
+        photosBundle.putLong(SkopeApplication.BUNDLEKEY_USERID, mSelectedOOI.getId());
         getServiceQueue().postToService(Type.READ_USER_PHOTOS, photosBundle);
         
         // Read favorites
         Bundle favoritesBundle = new Bundle();
-        favoritesBundle.putInt(SkopeApplication.BUNDLEKEY_USERID, mSelectedOOI.getId());
+        favoritesBundle.putLong(SkopeApplication.BUNDLEKEY_USERID, mSelectedOOI.getId());
 		getServiceQueue().postToService(Type.READ_USER_FAVORITES, favoritesBundle);
 		
         initializeMapView();
@@ -597,16 +598,18 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 
 		@Override
 		protected CustomHttpClient doInBackground(Integer... params) {
-			int userId = mCache.getUser().getId();
+			Long userId = mCache.getUser().getId();
 			String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 			String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-			String serviceUrl = String.format("%s/user/%d/favorites/%d/", mCache.getProperty("skope_service_url"), userId, params[0]);
+			String serviceUrl = mCache.getProperty("service_url");//String.format("%s/user/%d/favorites/%d/", mCache.getProperty("skope_service_url"), userId, params[0]);
 			
 			// Create HTTP client
 	        CustomHttpClient client = new CustomHttpClient(serviceUrl, OOIDetailMapActivity.this);
 	        client.setUseBasicAuthentication(true);
 	        client.setUsernamePassword(username, password);
-	        
+	        client.addParam("id", String.valueOf(userId));
+	        client.addParam("favoriteId", params[0].toString());
+	        client.addParam("action", APIAction.FAVORITES.getName());
 	        // Send HTTP request to web service
 	        try {
 	            client.execute(RequestMethod.POST);
@@ -661,17 +664,19 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 
 		@Override
 		protected CustomHttpClient doInBackground(Integer... params) {
-			int userId = mCache.getUser().getId();
+			Long userId = mCache.getUser().getId();
 			String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 			String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-			String serviceUrl = String.format("%s/user/%d/favorites/%d/", mCache.getProperty("skope_service_url"), userId, params[0]);
+			String serviceUrl = mCache.getProperty("skope_service_url");//String.format("%s/user/%d/favorites/%d/", mCache.getProperty("skope_service_url"), userId, params[0]);
 
 			
 			// Create HTTP client
 	        CustomHttpClient client = new CustomHttpClient(serviceUrl, OOIDetailMapActivity.this);
 	        client.setUseBasicAuthentication(true);
 	        client.setUsernamePassword(username, password);
-	        
+	        client.addParam("id", String.valueOf(userId));
+	        client.addParam("favoriteId", params[0].toString());
+	        client.addParam("action", APIAction.FAVORITES.getName());
 	        // Send HTTP request to web service
 	        try {
 	            client.execute(RequestMethod.DELETE);
@@ -728,17 +733,19 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 
 		@Override
 		protected CustomHttpClient doInBackground(Object... params) {
-			int userId = mCache.getUser().getId();
+			Long userId = mCache.getUser().getId();
 			String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 			String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-			String serviceUrl = String.format("%s/user/%d/report/%d/", mCache.getProperty("skope_service_url"), userId, params[0]);
+			String serviceUrl = mCache.getProperty("skope_service_url");//String.format("%s/user/%d/report/%d/", mCache.getProperty("skope_service_url"), userId, params[0]);
 			
 			// Create HTTP client
 	        CustomHttpClient client = new CustomHttpClient(serviceUrl, OOIDetailMapActivity.this);
 	        client.setUseBasicAuthentication(true);
 	        client.setUsernamePassword(username, password);
 	        client.addParam("message", (String) params[1]);
-	        
+	        client.addParam("id", String.valueOf(userId));
+	        client.addParam("reportId", params[0].toString());
+	        client.addParam("action", APIAction.REPORT.getName());
 	        // Send HTTP request to web service
 	        try {
 	            client.execute(RequestMethod.POST);

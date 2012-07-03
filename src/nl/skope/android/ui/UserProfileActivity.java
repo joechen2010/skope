@@ -526,7 +526,7 @@ public class UserProfileActivity extends BaseActivity {
 		Cache.USER_PHOTOS.clear();
 		// Request new read
 		Bundle bundle = new Bundle();
-        bundle.putInt(SkopeApplication.BUNDLEKEY_USERID, user.getId());
+        bundle.putLong(SkopeApplication.BUNDLEKEY_USERID, user.getId());
         getServiceQueue().postToService(Type.READ_USER_PHOTOS, bundle);
 	}
 
@@ -659,10 +659,10 @@ public class UserProfileActivity extends BaseActivity {
 		}
 
 		protected CustomHttpClient doInBackground(Object... args) {
-			int userId = getCache().getUser().getId();
+			Long userId = getCache().getUser().getId();
 			String username = (String) args[0];
 			String password = (String) args[1];
-			String serviceUrl = getCache().getProperty("skope_service_url") + "/user/" + userId + "/";
+			String serviceUrl = getCache().getProperty("service_url") ;
 			
 			// Set up HTTP client
 	        CustomHttpClient client = new CustomHttpClient(serviceUrl, getApplicationContext());
@@ -783,10 +783,10 @@ public class UserProfileActivity extends BaseActivity {
 
 		protected CustomHttpClient doInBackground(Object... args) {
 			User user = getCache().getUser();
-			int userId = user.getId();
+			Long userId = user.getId();
 			String username = (String) args[0];
 			String password = (String) args[1];
-			String serviceUrl = getCache().getProperty("skope_service_url") + "/user/" + userId + "/";
+			String serviceUrl = getCache().getProperty("service_url");
 			
 			// Set up HTTP client
 	        CustomHttpClient client = new CustomHttpClient(serviceUrl, getApplicationContext());

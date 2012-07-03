@@ -226,14 +226,14 @@ public class UserFavoritesActivity extends BaseActivity {
 	public void onResume() {
 		super.onResume();
 		if (checkCacheSanity()) {
-			int userId; 
+			Long userId; 
 			Bundle bundle = new Bundle();
 			if (getIntent() != null && getIntent().getExtras() != null) {
-				userId = getIntent().getExtras().getInt(SkopeApplication.BUNDLEKEY_USERID);
+				userId = getIntent().getExtras().getLong(SkopeApplication.BUNDLEKEY_USERID);
 			} else {
 				userId = getCache().getUser().getId();
 			}
-			bundle.putInt(SkopeApplication.BUNDLEKEY_USERID, userId);
+			bundle.putLong(SkopeApplication.BUNDLEKEY_USERID, userId);
 			getServiceQueue().postToService(Type.READ_USER_FAVORITES, bundle);
 		}
 	}

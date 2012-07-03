@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import nl.skope.android.http.CustomHttpClient;
 import nl.skope.android.http.CustomHttpClient.FlushedInputStream;
 import nl.skope.android.http.CustomHttpClient.RequestMethod;
+import nl.skope.android.util.APIAction;
 
 import org.apache.http.HttpStatus;
 import org.json.JSONException;
@@ -338,16 +339,18 @@ public class UserPhoto {
 
 		@Override
 		protected CustomHttpClient doInBackground(Void... params) {
-			int userId = mCache.getUser().getId();
+			Long userId = mCache.getUser().getId();
 			String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 			String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-			String absoluteUrl = mCache.getProperty("skope_service_url") + "/user/" + userId + "/photos/" + UserPhoto.this.mId + "/";
+			String absoluteUrl = mCache.getProperty("service_url") ;
 			
 			// Create HTTP client
 	        CustomHttpClient client = new CustomHttpClient(absoluteUrl);
 	        client.setUseBasicAuthentication(true);
 	        client.setUsernamePassword(username, password);
-	        
+	        client.addParam("id", userId.toString());
+	        client.addParam("action", APIAction.PHOTO.getName());
+	        client.addParam("photoid", String.valueOf(UserPhoto.this.mId));
 	        // Send HTTP request to web service
 	        try {
 	            client.execute(RequestMethod.DELETE);

@@ -11,6 +11,7 @@ import nl.skope.android.http.CustomHttpClient;
 import nl.skope.android.http.CustomHttpClient.RequestMethod;
 import nl.skope.android.ui.OOIChatActivity;
 import nl.skope.android.ui.OOIDetailMapActivity.AsyncTaskListener;
+import nl.skope.android.util.APIAction;
 
 import org.apache.http.HttpStatus;
 
@@ -73,9 +74,8 @@ public class C2DMBroadcastReceiver extends BroadcastReceiver {
 		}
 		
 		// Construct API registration URL
-		String baseUrl = properties.getProperty("skope_service_url");
-		String url = String.format("%s/user/%d/c2dm/register/%s/", baseUrl,
-				userId, mRegistrationId);
+		String baseUrl = properties.getProperty("service_url");
+		String url = baseUrl;//String.format("%s/user/%d/c2dm/register/%s/", baseUrl,userId, mRegistrationId);
 		String username = mPreferences.getString(
 				SkopeApplication.PREFS_USERNAME, "");
 		String password = mPreferences.getString(
@@ -94,12 +94,12 @@ public class C2DMBroadcastReceiver extends BroadcastReceiver {
 					&& !currentRegistrationId.equals(mRegistrationId)) {
 				// Registration ID for this device has changed.
 				// Delete the previous one.
-				new UserC2DMDeleteRegistration().execute(url, username, password);
+				new UserC2DMDeleteRegistration().execute(url, username, password,String.valueOf(userId),mRegistrationId);
 			}
 
 			// Send the registration ID to the 3rd party site that is sending
 			// the messages.
-			new UserC2DMRegister().execute(url, username, password);
+			new UserC2DMRegister().execute(url, username, password,String.valueOf(userId),mRegistrationId);
 		}
 	}
 
@@ -158,7 +158,9 @@ public class C2DMBroadcastReceiver extends BroadcastReceiver {
 			CustomHttpClient client = new CustomHttpClient(params[0]);
 			client.setUseBasicAuthentication(true);
 			client.setUsernamePassword(params[1], params[2]);
-
+			client.addParam("id", params[3]);
+			client.addParam("mRegistrationId", params[4]);
+			client.addParam("action", APIAction.REGISTRATION.getName());
 			// Send HTTP request to web service
 			try {
 				client.execute(RequestMethod.GET);

@@ -7,6 +7,7 @@ import nl.skope.android.application.Cache;
 import nl.skope.android.application.SkopeApplication;
 import nl.skope.android.application.UserPhoto;
 import nl.skope.android.http.CustomHttpClient.RequestMethod;
+import nl.skope.android.util.APIAction;
 
 import org.apache.http.HttpStatus;
 
@@ -119,7 +120,7 @@ public class ImageUploader {
 	 */
 	public String upload(String location, String fieldName, Uri uri) {
 		String userId = String.valueOf(mCache.getUser().getId());
-		String absoluteUrl = mCache.getProperty("skope_service_url") + "/user/" + userId + "/" + location + "/";
+		String absoluteUrl = mCache.getProperty("service_url");
 
 		// Create HTTP client
         CustomHttpClient client = new CustomHttpClient(absoluteUrl, mContext);
@@ -128,7 +129,9 @@ public class ImageUploader {
         
         // Add image
         client.addBitmapUri(fieldName, uri);
-         
+        client.addParam("id", String.valueOf(userId));
+        client.addParam("location", location);
+        client.addParam("action", APIAction.LOCATION.getName());
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.POST);
@@ -167,7 +170,7 @@ public class ImageUploader {
 	 * @throws IOException
 	 */
 	public void asyncUpload(String location, String fieldName, Uri uri) {
-		String absoluteUrl = mCache.getProperty("skope_service_url") + "/user/" + mUserId + "/" + location + "/";
+		String absoluteUrl = mCache.getProperty("service_url");
 		UploadRunner runner = new UploadRunner(absoluteUrl, mUsername, mPassword, fieldName);
 		runner.execute(uri);
 	}

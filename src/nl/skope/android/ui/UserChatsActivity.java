@@ -159,10 +159,10 @@ public class UserChatsActivity extends BaseActivity {
 	}
 
 	private void requestChatUsersUpdate() {
-		int userId; 
+		Long userId; 
 		Bundle bundle = new Bundle();
 		userId = getCache().getUser().getId();
-		bundle.putInt(SkopeApplication.BUNDLEKEY_USERID, userId);
+		bundle.putLong(SkopeApplication.BUNDLEKEY_USERID, userId);
 		getServiceQueue().postToService(Type.READ_USER_CHATS, bundle);		
 	}
 	
@@ -204,7 +204,7 @@ public class UserChatsActivity extends BaseActivity {
                 // Now retrieve all last messages to display in the list
             	for (User ooi: mChatsList) {
             		Bundle messagesBundle = new Bundle();
-                	messagesBundle.putInt(SkopeApplication.BUNDLEKEY_USERID, ooi.getId());
+                	messagesBundle.putLong(SkopeApplication.BUNDLEKEY_USERID, ooi.getId());
                 	//messagesBundle.putBoolean(SkopeApplication.BUNDLEKEY_CHAT_FROM, true);
                 	messagesBundle.putBoolean(SkopeApplication.BUNDLEKEY_CHAT_LAST, true);
                 	getServiceQueue().postToService(Type.READ_USER_CHAT_MESSAGES, messagesBundle);
@@ -213,7 +213,7 @@ public class UserChatsActivity extends BaseActivity {
             	// Retrieve number of unread messages
             	for (User ooi: mChatsList) {
             		Bundle messagesBundle = new Bundle();
-                	messagesBundle.putInt(SkopeApplication.BUNDLEKEY_USERID, ooi.getId());
+                	messagesBundle.putLong(SkopeApplication.BUNDLEKEY_USERID, ooi.getId());
                 	messagesBundle.putBoolean(SkopeApplication.BUNDLEKEY_CHAT_UNREAD, true);
                 	messagesBundle.putBoolean(SkopeApplication.BUNDLEKEY_CHAT_FROM, true);
                 	getServiceQueue().postToService(Type.READ_USER_CHAT_MESSAGES, messagesBundle);
