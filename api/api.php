@@ -37,16 +37,17 @@
 		$is_gender_public = $_REQUEST['is_gender_public'];
 		$is_date_of_birth_public = $_REQUEST['is_date_of_birth_public'];
 		$description = $_REQUEST['description'];
-
-		$mUsername = $_REQUEST['mUsername'];
-		$mPassword = $_REQUEST['mPassword'];
+		
+		
+		$username = $_REQUEST['username'];//$data['username'];
+		$password = $_REQUEST['password'];//$_SERVER['PHP_AUTH_PW'];
 		$version_code = $_REQUEST['version_code'];
 		
 		$subAction = $_REQUEST['subAction'];
 
 		$sql = "";
 		$mobile = "";
-		$s = $action.'--'.$mUsername.'--'.$mPassword;
+		$s = $action.'--'.$username.'--'.$password;
 		log_action($s);
 		if($action == 'LOCATION'){
 			$sql = "INSERT INTO a0626094354.gpsinfo (name ,mobile,address,city,street,latitude,longitude )VALUES ('".$name."', '".$mobile."','".$addr."','".$city."','".$street."','".$latitude."','".$longitude."')";
@@ -58,7 +59,7 @@
 			HTTPStatus(201);
 		}else if($action == 'LOGIN'){
 			// 430 upgrade 431 validate email
-			$sql = "SELECT * FROM a0626094354.path_user WHERE name = '".$mUsername."' and password= '".$mPassword."' limit 0,1";
+			$sql = "SELECT * FROM a0626094354.path_user WHERE email = '".$username."' and password= '".$password."' limit 0,1";
 			log_action($sql);
 			$rows = $mydm->SELECT($sql);
 			if(empty($rows)){
@@ -163,4 +164,6 @@ function log_action($msg) {
  
 }
 	
+
+
 ?>

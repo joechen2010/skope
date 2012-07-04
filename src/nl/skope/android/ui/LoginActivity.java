@@ -142,12 +142,14 @@ public class LoginActivity extends BaseActivity {
 		
 		// Set up HTTP client with url as argument
         CustomHttpClient client = new CustomHttpClient(loginUrl);
-        client.setUseBasicAuthentication(true);
+        client.setUseBasicAuthentication(false);
         client.setUsernamePassword(username, password);
         try {
         	int versionCode = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA).versionCode;
 			client.addParam("version_code", String.valueOf(versionCode));
 			client.addParam("action", APIAction.LOGIN.getName());
+			client.addParam("username", username);
+			client.addParam("password", password);
 		} catch (NameNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
