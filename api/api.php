@@ -100,23 +100,23 @@
 			if($subAction == 'CHAT'){
 				$sql = "INSERT INTO a0626094354.chat_message (id ,user_from_id,message )VALUES ('".$id."', '".$user_from_id."','".$message."')";
 				$result = $mydm->inserts($sql);
-			}else if($subAction == 'countNew'){
+			}else if($subAction == 'COUNTNEW'){
 				$sql = "select count(1) as count a0626094354.chat_message WHERE read = false";
 				$rows = $mydm->SELECT($sql);
 				echo json_encode($rows);
 			}else if($subAction == 'READCHATS'){
 				$sql = "select * a0626094354.chat_message WHERE id = '".$id."'";
-				if (strlen(strstr($filter,'NEW'))>0) {
-					$sql = $sql.' and isRead=false';
+				if (contains($filter,'NEW')) {
+					$sql = $sql." and isRead=false";
 				}
-				if (strlen(strstr($filter,'MARK_AS_READ'))>0) {
-					$sql = $sql.' and mark_as_read=true';
+				if (contains($filter,'MARK_AS_READ')) {
+					$sql = $sql." and mark_as_read=true";
 				}
-				if (strlen(strstr($filter,'FROM'))>0) {
-					$sql = $sql.' and user_from_id = '".$user_from_id."'";
+				if (contains($filter,'FROM')) {
+					$sql = $sql." and user_from_id = '".$user_from_id."'";
 				}
-				if (strlen(strstr($filter,'LAST'))>0) {
-					$sql = $sql.' limit 0 ,1 order by timestamp desc';
+				if (contains($filter,'LAST')) {
+					$sql = $sql." limit 0 ,1 order by timestamp desc";
 				}
 				$rows = $mydm->SELECT($sql);
 				echo json_encode($rows);
@@ -146,5 +146,19 @@ function log_action($msg) {
 	chmod($filename, 0644);
 }
  
+ 
+ function contains($string,$substring) {
+        $pos = strpos($string, $substring);
+ 
+        if($pos === false) {
+                // string needle NOT found in haystack
+                return false;
+        }
+        else {
+                // string needle found in haystack
+                return true;
+        }
+ 
+}
 	
 ?>
