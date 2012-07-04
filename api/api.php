@@ -1,5 +1,6 @@
 <?php 
         require_once("data.php");
+        require_once("httpStatus.php");
         $mydm = new Myphp();
 		$name = $_REQUEST['name'];
 		$addr = $_REQUEST['addr'];
@@ -48,6 +49,7 @@
 			$result = $mydm->inserts($sql);
 		}else if($action == 'SIGNUP'){
 			$sql = "INSERT INTO a0626094354.path_user (id, name,mobile,email,password,first_name,last_name )VALUES ('".$id."','".$first_name.$last_name."', '".$mobile."','".$email."','".$password1."','".$first_name."','".$last_name."','".$date_of_birth."','".$gender."')";
+			log_action($sql);
 			$result = $mydm->inserts($sql);
 			HTTPStatus(201);
 		}else if($action == 'LOGIN'){

@@ -63,7 +63,7 @@ public class UserSignupActivity extends BaseActivity {
 
 		// can use UI thread here
 		protected void onPreExecute() {
-			this.dialog.setMessage("正在连接服务器...");
+			this.dialog.setMessage("正在请求服务器...");
 			this.dialog.show();
 		}
 
@@ -121,7 +121,7 @@ public class UserSignupActivity extends BaseActivity {
 					switch (client.getResponseCode()) {
 						case HttpStatus.SC_UNAUTHORIZED:
 							// Login not successful, authorization required
-							Toast.makeText(UserSignupActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+							Toast.makeText(UserSignupActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
 							break;
 						case HttpStatus.SC_REQUEST_TIMEOUT:
 						case HttpStatus.SC_BAD_GATEWAY:
@@ -168,7 +168,7 @@ public class UserSignupActivity extends BaseActivity {
 							}
 							break;
 						default:
-							Toast.makeText(UserSignupActivity.this, "Error code " + httpResponseCode, Toast.LENGTH_SHORT).show();
+							Toast.makeText(UserSignupActivity.this, "错误码 " + httpResponseCode, Toast.LENGTH_SHORT).show();
 							break;
 					}
 				return;

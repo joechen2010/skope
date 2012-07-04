@@ -44,10 +44,10 @@ function HTTPStatus($num) {
     );
  
     header($http[$num]);
- 
+ 	exit;
     /*return
         array(
-            'code' => $num,
+            'responseCode' => $num,
             'error' => $http[$num],
         );*/
 }

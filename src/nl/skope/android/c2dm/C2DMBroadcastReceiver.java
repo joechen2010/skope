@@ -94,7 +94,7 @@ public class C2DMBroadcastReceiver extends BroadcastReceiver {
 					&& !currentRegistrationId.equals(mRegistrationId)) {
 				// Registration ID for this device has changed.
 				// Delete the previous one.
-				new UserC2DMDeleteRegistration().execute(url, username, password,String.valueOf(userId),mRegistrationId);
+				new UserC2DMDeleteRegistration().execute(url, username, password,String.valueOf(userId), mRegistrationId);
 			}
 
 			// Send the registration ID to the 3rd party site that is sending
@@ -159,7 +159,7 @@ public class C2DMBroadcastReceiver extends BroadcastReceiver {
 			client.setUseBasicAuthentication(true);
 			client.setUsernamePassword(params[1], params[2]);
 			client.addParam("id", params[3]);
-			client.addParam("mRegistrationId", params[4]);
+			client.addParam("registrationId", params[4]);
 			client.addParam("action", APIAction.REGISTRATION.getName());
 			// Send HTTP request to web service
 			try {
