@@ -138,7 +138,7 @@ public class LoginActivity extends BaseActivity {
     }
 	
 	private int login(String username, String password) {
-		final String loginUrl = getCache().getProperty("service_url");
+		final String loginUrl = getCache().getServiceUrl();
 		
 		// Set up HTTP client with url as argument
         CustomHttpClient client = new CustomHttpClient(loginUrl);
@@ -212,7 +212,7 @@ public class LoginActivity extends BaseActivity {
     	editor.putLong(SkopeApplication.PREFS_USERID, user.getId());
     	
     	// Store preference defaults
-        editor.putBoolean(SkopeApplication.PREFS_GPSENABLED, false);
+        editor.putBoolean(SkopeApplication.PREFS_GPSENABLED, true);
     	editor.commit();
 
     	// Retrieve favorites
@@ -235,7 +235,7 @@ public class LoginActivity extends BaseActivity {
 		long now = new Date().getTime();
 		long daysDifference = (now - registrationTimestamp) / (24 * 60 * 60 * 1000);
 		// TODO arbitrary expiration time
-		boolean isRegistrationExpired = daysDifference > 7;
+		boolean isRegistrationExpired = daysDifference > Long.MAX_VALUE;//7;
 		boolean isRegistrationIdPresent = registrationId == null || !registrationId.equals("");
 
 		if (!isRegistrationIdPresent || isRegistrationExpired) {

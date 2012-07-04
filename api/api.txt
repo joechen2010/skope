@@ -1,0 +1,92 @@
+CHAT: 
+1.count new message
+			client.addParam("id", String.valueOf(params[3]));
+	        client.addParam("chatAction", "COUNTNEW");
+	        client.addParam("action", APIAction.CHAT.getName());
+
+2.chat
+			client.addParam("message", mMessage);
+			client.addParam("action", APIAction.CHAT.getName());
+			client.addParam("id", params[4]);
+			client.addParam("toId", params[5]);
+			client.addParam("chatAction", "chat");
+
+3. readchats(mark_as_read,new,from,last)
+		client.addParam("id", String.valueOf(userId));
+        client.addParam("action", APIAction.CHAT.getName());
+
+
+LOGIN:
+
+			client.addParam("version_code", String.valueOf(versionCode));
+			client.addParam("action", APIAction.LOGIN.getName());
+	        401
+	       430,431
+
+LOGOUT:	       
+	       client.setUsernamePassword(username, password);
+        	client.addParam("action", APIAction.LOGOUT.getName());
+	       
+FAVORITES: add and delete,READ	      
+	     client.addParam("id", String.valueOf(userId));
+	        client.addParam("favoriteId", params[0].toString());
+	        client.addParam("favoriteAction", "ADD");
+	        client.addParam("action", APIAction.FAVORITES.getName());
+	        
+REPORT:	        client.addParam("message", (String) params[1]);
+	        client.addParam("id", String.valueOf(userId));
+	        client.addParam("reportId", params[0].toString());
+	        client.addParam("action", APIAction.REPORT.getName());
+	        
+INFO:	        
+	        client.addParam("action", APIAction.INFO.getName());
+			client.addParam("id", userId.toString());
+			client.addParam("first_name", form.firstName);
+			client.addParam("last_name", form.lastName);
+			client.addParam("date_of_birth", form.dateOfBirth);
+			client.addParam("gender", form.gender);
+			client.addParam("relationship_status", form.relationship_status);
+			client.addParam("home_town", form.homeTown);
+			client.addParam("work_job_title", form.work_job_title);
+			client.addParam("work_company", form.work_company);
+			client.addParam("education_study", form.education_study);
+			client.addParam("education_college", form.education_college);
+			client.addParam("is_gender_public", form.isGenderPublic ? "on" : "");
+			client.addParam("is_date_of_birth_public", 
+										form.isDateOfBirthPublic ? "on" : "");
+										
+REGISTRATION:										
+			client.addParam("id", params[3]);
+			client.addParam("registrationId", params[4]);
+			client.addParam("action", APIAction.REGISTRATION.getName());
+
+PHOTO: 	DELETE,		
+			client.addParam("id", userId.toString());
+	        client.addParam("action", APIAction.PHOTO.getName());
+	        client.addParam("photoAction", "DELETE");
+	        client.addParam("photoid", String.valueOf(UserPhoto.this.mId));
+		READ
+		client.addParam("id", String.valueOf(userId));
+        client.addParam("photoAction", "READ");
+        client.addParam("action", APIAction.PHOTOS.getName());
+
+
+
+SEARCH_NEAR_BY:	        
+	    client.addParam("lat", String.valueOf(currentLocation.getLatitude()));
+        client.addParam("lng", String.valueOf(currentLocation.getLongitude()));
+        client.addParam("status_message", mCache.getUser().getStatus());
+        client.addParam("action", APIAction.SEARCH_NEAR_BY.getName());
+        
+        
+        
+READUSER:        
+        client.addParam("id", String.valueOf(userId));
+        client.addParam("action", APIAction.READUSER.getName());
+        
+        
+UPLOAD:        
+        client.addParam("id", String.valueOf(userId));
+        client.addParam("location", location);
+        client.addParam("action", APIAction.UPLOAD.getName());
+	        

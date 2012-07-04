@@ -13,6 +13,7 @@ import nl.skope.android.c2dm.C2DMBroadcastReceiver;
 import nl.skope.android.http.CustomHttpClient;
 import nl.skope.android.http.CustomHttpClient.RequestMethod;
 import nl.skope.android.ui.OOIDetailMapActivity.AsyncTaskListener;
+import nl.skope.android.util.APIAction;
 import nl.skope.android.util.Type;
 import nl.skope.android.util.Utility;
 
@@ -150,7 +151,7 @@ public class OOIChatActivity extends BaseActivity {
 	    case R.id.signout:
 	    	getServiceQueue().stopService();
 	    	getCache().setUserSignedOut(true);
-	    	String logoutURL = getCache().getProperty("service_url");
+	    	String logoutURL = getCache().getServiceUrl();
 	    	String username = getCache().getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 	    	String password = getCache().getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
 	    	new LogoutTask().execute(this, logoutURL, username, password);
@@ -265,12 +266,9 @@ public class OOIChatActivity extends BaseActivity {
 
 			String username = getCache().getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 			String password = getCache().getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-			String url = String.format("%s/user/%d/chat/%d/", 
-								getCache().getProperty("service_url"),
-								userId ,
-								userToId);
+			String url = getCache().getServiceUrl();//String.format("%s/user/%d/chat/%d/",getCache().getProperty("service_url"),userId ,userToId);
 			// Send message
-			new ChatPost().execute(url, username, password, message);
+			new ChatPost().execute(url, username, password, message,userId.toString(),userToId.toString());
 
 			// Reset out string buffer to zero and clear the edit text field
 			mOutStringBuffer.setLength(0);
@@ -437,6 +435,10 @@ public class OOIChatActivity extends BaseActivity {
 			mMessage = params[3];
 			
 			client.addParam("message", mMessage);
+			client.addParam("action", APIAction.CHAT.getName());
+			client.addParam("id", params[4]);
+			client.addParam("toId", params[5]);
+			client.addParam("chatAction", "CHAT");
 
 			// Send HTTP request to web service
 			try {

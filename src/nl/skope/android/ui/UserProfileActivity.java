@@ -140,7 +140,7 @@ public class UserProfileActivity extends BaseActivity {
 														android.R.layout.select_dialog_item, items);
 				AlertDialog.Builder builder  = new AlertDialog.Builder(UserProfileActivity.this);
 				 
-				builder.setTitle("Select Image");
+				builder.setTitle("Ñ¡ÔñÍ¼Æ¬");
 				builder.setAdapter( adapter, new DialogInterface.OnClickListener() {
 				public void onClick( DialogInterface dialog, int item ) {
 					// Reset global image uri, so we don't use previous values by accident
@@ -662,7 +662,7 @@ public class UserProfileActivity extends BaseActivity {
 			Long userId = getCache().getUser().getId();
 			String username = (String) args[0];
 			String password = (String) args[1];
-			String serviceUrl = getCache().getProperty("service_url") ;
+			String serviceUrl = getCache().getServiceUrl() ;
 			
 			// Set up HTTP client
 	        CustomHttpClient client = new CustomHttpClient(serviceUrl, getApplicationContext());
@@ -786,7 +786,7 @@ public class UserProfileActivity extends BaseActivity {
 			Long userId = user.getId();
 			String username = (String) args[0];
 			String password = (String) args[1];
-			String serviceUrl = getCache().getProperty("service_url");
+			String serviceUrl = getCache().getServiceUrl();
 			
 			// Set up HTTP client
 	        CustomHttpClient client = new CustomHttpClient(serviceUrl, getApplicationContext());

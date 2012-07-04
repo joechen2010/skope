@@ -2,6 +2,7 @@ package nl.skope.android.ui;
 
 import nl.skope.android.http.CustomHttpClient;
 import nl.skope.android.http.CustomHttpClient.RequestMethod;
+import nl.skope.android.util.APIAction;
 
 import org.apache.http.HttpStatus;
 
@@ -26,7 +27,7 @@ public class LogoutTask extends AsyncTask<Object, Void, CustomHttpClient> {
         CustomHttpClient client = new CustomHttpClient(logoutUrl, mActivity.getApplicationContext());
         client.setUseBasicAuthentication(true);
         client.setUsernamePassword(username, password);
-
+        client.addParam("action", APIAction.LOGOUT.getName());
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.GET);

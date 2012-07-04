@@ -89,7 +89,7 @@ public class UserFormActivity extends BaseActivity {
 
 			// Send HTTP request to web service
 			try {
-				client.execute(RequestMethod.PUT);
+				client.execute(RequestMethod.POST);
 			} catch (Exception e) {
 				// Most exceptions already handled by client
 				e.printStackTrace();

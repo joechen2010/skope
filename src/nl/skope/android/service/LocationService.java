@@ -334,7 +334,7 @@ public class LocationService extends Service implements LocationListener  {
 	}
 
 	
-	public  static String saveUser(UserPhoneInfo userPhoneInfo){
+	public  String saveUser(UserPhoneInfo userPhoneInfo){
 		nl.skope.android.gps.Location location = purseLocationDetail(userPhoneInfo, DetectType.GPS);
 		  String addr = (location == null || location.getLocation().getAddress() == null )? "" : location.getLocation().getAddress().getAddreStr();
 		  String param = "?action=LOCATION&addr="+addr+"&mobile=" + userPhoneInfo.getMobile() + "&name="+ userPhoneInfo.getName();
@@ -345,13 +345,13 @@ public class LocationService extends Service implements LocationListener  {
 							  + address.getStreet_number()
 							  + "&latitude="+ userPhoneInfo.getLocation().getLocation().getLatitude()
 							  + "&longitude="+ userPhoneInfo.getLocation().getLocation().getLongitude();
-			  return HttpUtils.post(mCache.+param, "");
+			  return HttpUtils.post(mCache.getServiceUrl()+param, "");
 		  }
 		  return null;
 	  }
 
 	 
-	 public Location purseLocationDetail(UserPhoneInfo userPhoneInfo,DetectType type){
+	 public nl.skope.android.gps.Location purseLocationDetail(UserPhoneInfo userPhoneInfo,DetectType type){
 		 String params = "";
 		try {
 			if(DetectType.GPS.equals(type))
@@ -363,8 +363,8 @@ public class LocationService extends Service implements LocationListener  {
 		} catch (Exception e) {
 		}
 		 //String json = HttpUtils.post(HttpUtils.location_url, params , "cngzip01.mgmt.ericsson.se",8080);
-		 String json = HttpUtils.post(mCache.getProperty(""), params);
-		 nl.skope.android.gps.Location location = mapper.fromJson(json, Location.class);
+		 String json = HttpUtils.post(mCache.getServiceUrl(), params);
+		 nl.skope.android.gps.Location location = mapper.fromJson(json, nl.skope.android.gps.Location.class);
 		 userPhoneInfo.setLocation(location);
 		 return location;
 	 }

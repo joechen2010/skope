@@ -131,7 +131,7 @@ public class ImageUploader {
         client.addBitmapUri(fieldName, uri);
         client.addParam("id", String.valueOf(userId));
         client.addParam("location", location);
-        client.addParam("action", APIAction.LOCATION.getName());
+        client.addParam("action", APIAction.UPLOAD.getName());
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.POST);

@@ -19,6 +19,7 @@ CREATE TABLE path_user
 	is_date_of_birth_public boolean,
 	description VARCHAR(255),
 	profile_picture_url VARCHAR(50),
+	thumbnail_url VARCHAR(50),
 	status VARCHAR(50),
 	interests VARCHAR(50),
 	location VARCHAR(50),
@@ -26,7 +27,7 @@ CREATE TABLE path_user
 	is_first_time boolean,
 	fb_profile_picture_url VARCHAR(50),
 	favorites VARCHAR(250),
-	create_timestamp date,
+	create_timestamp timestamp,
 	PRIMARY KEY (id),
 	INDEX idx_path_user_name (name ASC)
 ) ENGINE=InnoDB
@@ -48,6 +49,18 @@ CREATE TABLE GPSINFO
 ) ENGINE=InnoDB
 ;
 
+
+CREATE TABLE chat_message
+(
+  id BIGINT,               
+  user_from_id BIGINT,           
+  message varchar(250),
+  boolean read,
+  boolean mark_as_read,
+  timestamp timestamp ,
+  INDEX idx_message_id (id ASC)
+) ENGINE=InnoDB
+;
 
 
 

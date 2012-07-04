@@ -21,6 +21,8 @@
 		$date_of_birth = $_REQUEST['date_of_birth'];
 		$gender = $_REQUEST['gender'];
 		$id = $_REQUEST['id'];
+		$toId = $_REQUEST['toId'];
+		$message = $_REQUEST['message'];
 
 
 		$relationship_status = $_REQUEST['relationship_status'];
@@ -36,6 +38,8 @@
 		$mUsername = $_REQUEST['mUsername'];
 		$mPassword = $_REQUEST['mPassword'];
 		$version_code = $_REQUEST['version_code'];
+		
+		$chatAction = $_REQUEST['chatAction'];
 
 		$sql = "";
 		
@@ -45,33 +49,49 @@
 		}else if($action == 'SIGNUP'){
 			$sql = "INSERT INTO a0626094354.path_user (id, name,mobile,email,password,first_name,last_name )VALUES ('".$id."','".$first_name.$last_name."', '".$mobile."','".$email."','".$password1."','".$first_name."','".$last_name."','".$date_of_birth."','".$gender."')";
 			$result = $mydm->inserts($sql);
+			HTTPStatus(201);
 		}else if($action == 'LOGIN'){
-			// 430 upgrade 
+			// 430 upgrade 431 validate email
 			$sql = "SELECT * FROM a0626094354.path_user WHERE name = '".$mUsername."' and password= '".$mPassword."' limit 0,1";
-			var $rows = $mydm->SELECT($sql);
+			$rows = $mydm->SELECT($sql);
 			if(empty($rows)){
-				echo 431;
+				HTTPStatus(401);
 			}else{
 				echo json_encode($rows);
 			}
 		}else if($action == 'LOGOUT'){
 			
+		}else if($action == 'READUSER'){
+			$sql = "SELECT * FROM a0626094354.path_user WHERE id = '".$id."'";
+			$rows = $mydm->SELECT($sql);
+			if(empty($rows)){
+				HTTPStatus(401);
+			}else{
+				echo json_encode($rows);
+			}
 		}else if($action == 'INFO'){
-			// 430 upgrade 
 			$sql = "update a0626094354.path_user set first_name='".$first_name."',last_name='".$last_name."',date_of_birth='".$date_of_birth."',gender='".$gender."',relationship_status='".$relationship_status."',home_town='".$home_town."',work_job_title='".$work_job_title."',work_company='".$work_company."',education_study='".$education_study."',education_college='".$education_college."',is_gender_public='".$is_gender_public."',is_date_of_birth_public='".$is_date_of_birth_public."' where id = '".$id."'";
-			var $effectRows = $mydm->inserts($sql);
+			$effectRows = $mydm->inserts($sql);
 			if($effectRows>0){
 				 $sql = "SELECT * FROM a0626094354.path_user WHERE name = '".$mUsername."' limit 0,1";
-				 var $rows = $mydm->SELECT($sql);
+				 $rows = $mydm->SELECT($sql);
 				 echo json_encode($rows);
 			}else{
-				//echo json_encode($effectRows);
+				HTTPStatus(401);
 			}
+		}else if($action == 'CHAT'){
+			if($chatAction == 'CHAT'){
+				$sql = "INSERT INTO a0626094354.chat_message (id ,user_from_id,message )VALUES ('".$id."', '".$user_from_id."','".$message."')";
+				$result = $mydm->inserts($sql);
+			}else if($chatAction == 'countNew'){
+				$sql = "select * a0626094354.chat_message WHERE read = false";
+				$result = $mydm->inserts($sql);
+			} 
 		}else{
 			$sql = "SELECT name ,mobile,address,city,street,latitude,longitude,timestamp FROM a0626094354.gpsinfo WHERE name = '".$name."' order by timestamp desc limit 0,20 ";
 			if($limit != null && $offset != null)
 				$sql = $sql.' limit '.$offset.','.$limit;
-			var $rows = $mydm->SELECT($sql);
+			$rows = $mydm->SELECT($sql);
 			echo json_encode($rows);
 		}
 		

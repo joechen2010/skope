@@ -350,10 +350,11 @@ public class UserPhoto {
 	        client.setUsernamePassword(username, password);
 	        client.addParam("id", userId.toString());
 	        client.addParam("action", APIAction.PHOTO.getName());
+	        client.addParam("photoAction", "DELETE");
 	        client.addParam("photoid", String.valueOf(UserPhoto.this.mId));
 	        // Send HTTP request to web service
 	        try {
-	            client.execute(RequestMethod.DELETE);
+	            client.execute(RequestMethod.POST);
 	        } catch (Exception e) {
 	        	// Most exceptions already handled by client
 	            e.printStackTrace();

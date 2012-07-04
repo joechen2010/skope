@@ -58,12 +58,12 @@ public class UserSignupActivity extends BaseActivity {
 
 	private class SignupTask extends AsyncTask<UserSignupForm, Void, CustomHttpClient> {
 		private ProgressDialog dialog = new ProgressDialog(UserSignupActivity.this);
-		private String mURL = getCache().getProperty("service_url") ;
+		private String mURL = getCache().getServiceUrl() ;
 		private UserSignupForm mForm;
 
 		// can use UI thread here
 		protected void onPreExecute() {
-			this.dialog.setMessage("Contacting server...");
+			this.dialog.setMessage("正在连接服务器...");
 			this.dialog.show();
 		}
 
@@ -103,7 +103,7 @@ public class UserSignupActivity extends BaseActivity {
 			// Check for server response
 			if (httpResponseCode == 0) {
 				// No server response
-				Toast.makeText(UserSignupActivity.this, "Connection failed", Toast.LENGTH_SHORT).show();
+				Toast.makeText(UserSignupActivity.this, "连接发生异常", Toast.LENGTH_SHORT).show();
 				return;
 			} else if (httpResponseCode == HttpStatus.SC_CREATED) {
 				// The verification message is returned in the response
@@ -118,59 +118,59 @@ public class UserSignupActivity extends BaseActivity {
 				showDialog(DIALOG_VERIFICATION_SENT);
 			} else {
 				// Server returned error code
-				switch (client.getResponseCode()) {
-				case HttpStatus.SC_UNAUTHORIZED:
-					// Login not successful, authorization required
-					Toast.makeText(UserSignupActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
-					break;
-				case HttpStatus.SC_REQUEST_TIMEOUT:
-				case HttpStatus.SC_BAD_GATEWAY:
-				case HttpStatus.SC_GATEWAY_TIMEOUT:
-					// Connection timeout
-					Toast.makeText(
-							UserSignupActivity.this,
-							getResources().getText(R.string.error_connection_failed), Toast.LENGTH_SHORT).show();
-					break;
-				case HttpStatus.SC_INTERNAL_SERVER_ERROR:
-					Toast.makeText(
-							UserSignupActivity.this,
-							getResources().getText(R.string.error_server_error), Toast.LENGTH_LONG).show();
-					break;
-				case HttpStatus.SC_BAD_REQUEST:
-					// Validation failed, extract form errors from response
-					JSONObject jsonResponse = null;
-					try {
-						jsonResponse = new JSONObject(client.getResponse());
-					} catch (JSONException e) {
-						// Log exception
-						Log.e(TAG, e.toString());
-						Toast.makeText(UserSignupActivity.this, "Invalid form", Toast.LENGTH_SHORT).show();
-						return;
-					}
-
-					if (jsonResponse.length() > 0) {
-						JSONArray fields = jsonResponse.names();
-						try {
-							JSONArray errorList = jsonResponse .getJSONArray(fields.getString(0));
-							String error = errorList.getString(0);
-							if (error.equals(VALIDATION_MESSAGE_REQUIRED)) {
-								Toast.makeText(
-										UserSignupActivity.this, getResources() .getString(
-												R.string.signup_validation_required_fields),
-												Toast.LENGTH_LONG).show();
-							} else {
-								Toast.makeText(UserSignupActivity.this, error, Toast.LENGTH_LONG).show();
+					switch (client.getResponseCode()) {
+						case HttpStatus.SC_UNAUTHORIZED:
+							// Login not successful, authorization required
+							Toast.makeText(UserSignupActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+							break;
+						case HttpStatus.SC_REQUEST_TIMEOUT:
+						case HttpStatus.SC_BAD_GATEWAY:
+						case HttpStatus.SC_GATEWAY_TIMEOUT:
+							// Connection timeout
+							Toast.makeText(
+									UserSignupActivity.this,
+									getResources().getText(R.string.error_connection_failed), Toast.LENGTH_SHORT).show();
+							break;
+						case HttpStatus.SC_INTERNAL_SERVER_ERROR:
+							Toast.makeText(
+									UserSignupActivity.this,
+									getResources().getText(R.string.error_server_error), Toast.LENGTH_LONG).show();
+							break;
+						case HttpStatus.SC_BAD_REQUEST:
+							// Validation failed, extract form errors from response
+							JSONObject jsonResponse = null;
+							try {
+								jsonResponse = new JSONObject(client.getResponse());
+							} catch (JSONException e) {
+								// Log exception
+								Log.e(TAG, e.toString());
+								Toast.makeText(UserSignupActivity.this, "Invalid form", Toast.LENGTH_SHORT).show();
+								return;
 							}
-						} catch (JSONException e) {
-							Log.e(TAG, e.toString());
-						}
-						break;
+		
+							if (jsonResponse.length() > 0) {
+								JSONArray fields = jsonResponse.names();
+								try {
+									JSONArray errorList = jsonResponse .getJSONArray(fields.getString(0));
+									String error = errorList.getString(0);
+									if (error.equals(VALIDATION_MESSAGE_REQUIRED)) {
+										Toast.makeText(
+												UserSignupActivity.this, getResources() .getString(
+														R.string.signup_validation_required_fields),
+														Toast.LENGTH_LONG).show();
+									} else {
+										Toast.makeText(UserSignupActivity.this, error, Toast.LENGTH_LONG).show();
+									}
+								} catch (JSONException e) {
+									Log.e(TAG, e.toString());
+								}
+								break;
+							}
+							break;
+						default:
+							Toast.makeText(UserSignupActivity.this, "Error code " + httpResponseCode, Toast.LENGTH_SHORT).show();
+							break;
 					}
-					break;
-				default:
-					Toast.makeText(UserSignupActivity.this, "Error code " + httpResponseCode, Toast.LENGTH_SHORT).show();
-					break;
-				}
 				return;
 			}
 		}

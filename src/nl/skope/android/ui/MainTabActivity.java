@@ -156,7 +156,7 @@ public class MainTabActivity extends TabActivity {
 	    case R.id.signout:
 	    	mApplication.getServiceQueue().stopService();
 	    	mCache.setUserSignedOut(true);
-	    	String logoutURL = mCache.getProperty("service_url");
+	    	String logoutURL = mCache.getServiceUrl();
 	    	String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 	    	String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
 	    	new LogoutTask().execute(this, logoutURL, username, password);
@@ -225,7 +225,7 @@ public class MainTabActivity extends TabActivity {
 		Long userId = mCache.getUser().getId();
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String url = mCache.getProperty("service_url");//String.format("%s/user/%d/chat/?count&new",mCache.getProperty("skope_service_url"),userId);
+		String url = mCache.getServiceUrl();//String.format("%s/user/%d/chat/?count&new",mCache.getProperty("skope_service_url"),userId);
 		// Send message
 		new RetrieveNrUnreadMessages().execute(url, username, password,userId.toString());
 	}
@@ -238,7 +238,7 @@ public class MainTabActivity extends TabActivity {
 			client.setUseBasicAuthentication(true);
 			client.setUsernamePassword(params[1], params[2]);
 			client.addParam("id", String.valueOf(params[3]));
-	        client.addParam("chatAction", "count&new");
+	        client.addParam("chatAction", "COUNTNEW");
 	        client.addParam("action", APIAction.CHAT.getName());
 			// Send HTTP request to web service
 			try {

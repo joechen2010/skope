@@ -285,6 +285,7 @@ public class OOIListActivity extends BaseActivity {
                 holder.nameText = (TextView) convertView.findViewById(R.id.name_text);
                 holder.distanceText = (TextView) convertView.findViewById(R.id.distance_text);
                 holder.icon = (ImageView) convertView.findViewById(R.id.icon);
+                //TODO : Add age text
                 convertView.setTag(holder);
             } else {
             	holder = (ViewHolder) convertView.getTag();

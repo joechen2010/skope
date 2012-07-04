@@ -251,7 +251,7 @@ public class WorkerThread extends Thread {
         client.addParam("lat", String.valueOf(currentLocation.getLatitude()));
         client.addParam("lng", String.valueOf(currentLocation.getLongitude()));
         client.addParam("status_message", mCache.getUser().getStatus());
-        client.addParam("action", APIAction.MAIN.getName());
+        client.addParam("action", APIAction.SEARCH_NEAR_BY.getName());
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.GET);
@@ -335,6 +335,7 @@ public class WorkerThread extends Thread {
         client.setUseBasicAuthentication(true);
         client.setUsernamePassword(username, password);
         client.addParam("id", String.valueOf(userId));
+        client.addParam("favoriteAction", "READ");
         client.addParam("action", APIAction.FAVORITES.getName());
         // Send HTTP request to web service
         try {
@@ -409,11 +410,11 @@ public class WorkerThread extends Thread {
     	mUiQueue.postToUi(Type.READ_USER_START, null, true);
     	
 		// Bundle present, extract mId
-    	int userId = bundle.getInt(SkopeApplication.BUNDLEKEY_USERID);
+    	Long userId = bundle.getLong(SkopeApplication.BUNDLEKEY_USERID);
 
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
-		String serviceUrl = mCache.getServiceUrl();//String.format("%s/user/%d/",								mCache.getProperty("service_url"),							userId);
+		String serviceUrl = mCache.getServiceUrl();//String.format("%s/user/%d/",mCache.getProperty("service_url"),userId);
 		
 		// Set up HTTP client
         CustomHttpClient client = new CustomHttpClient(serviceUrl);
@@ -470,6 +471,7 @@ public class WorkerThread extends Thread {
         client.setUsernamePassword(username, password);
         client.addParam("id", String.valueOf(userId));
         client.addParam("action", APIAction.CHAT.getName());
+        client.addParam("chatAction", "READ");
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.GET);
@@ -575,30 +577,30 @@ public class WorkerThread extends Thread {
 		String serviceUrl = mCache.getServiceUrl();//String.format("%s/user/%d/chat/%d/", mCache.getProperty("service_url"),userId ,	userFromId);
 		String chatAction = "";
 		if (filterUnreadMessages) {
-			chatAction += "new";
+			chatAction += "NEW";
 		}
 		
 		if (markAsRead) {
 			if (filterUnreadMessages) {
-				chatAction += "mark_as_read";
+				chatAction += "MARK_AS_READ";
 			} else {
-				chatAction += "mark_as_read";
+				chatAction += "MARK_AS_READ";
 			}
 		}
 		
 		if (filterFrom) {
 			if (filterUnreadMessages || markAsRead) {
-				chatAction += "from";				
+				chatAction += "FROM";				
 			} else {
-				chatAction += "from";
+				chatAction += "FROM";
 			}
 		}
 		
 		if (lastMessage) {
 			if (filterUnreadMessages || markAsRead || filterFrom) {
-				chatAction += "last";
+				chatAction += "LAST";
 			} else {
-				chatAction += "last";
+				chatAction += "LAST";
 			}
 		}
 		
@@ -735,7 +737,8 @@ public class WorkerThread extends Thread {
         client.setUseBasicAuthentication(true);
         client.setUsernamePassword(username, password);
         client.addParam("id", String.valueOf(userId));
-        client.addParam("action", APIAction.PHOTOS.getName());
+        client.addParam("photoAction", "READ");
+        client.addParam("action", APIAction.PHOTO.getName());
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.GET);
