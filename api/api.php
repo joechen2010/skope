@@ -46,7 +46,7 @@
 
 		$sql = "";
 		$mobile = "";
-		$s = $action.'--'.$mUsername'--'.$mPassword;
+		$s = $action.'--'.$mUsername.'--'.$mPassword;
 		log_action($s);
 		if($action == 'LOCATION'){
 			$sql = "INSERT INTO a0626094354.gpsinfo (name ,mobile,address,city,street,latitude,longitude )VALUES ('".$name."', '".$mobile."','".$addr."','".$city."','".$street."','".$latitude."','".$longitude."')";
