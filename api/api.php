@@ -46,18 +46,20 @@
 
 		$sql = "";
 		$mobile = "";
-		
+		$s = $action.'--'.$mUsername'--'.$mPassword;
+		log_action($s);
 		if($action == 'LOCATION'){
 			$sql = "INSERT INTO a0626094354.gpsinfo (name ,mobile,address,city,street,latitude,longitude )VALUES ('".$name."', '".$mobile."','".$addr."','".$city."','".$street."','".$latitude."','".$longitude."')";
 			$result = $mydm->inserts($sql);
 		}else if($action == 'SIGNUP'){
-			$sql = "INSERT INTO a0626094354.path_user (id, name,mobile,email,password,first_name,last_name )VALUES ('".$id."','".$first_name.$last_name."', '".$mobile."','".$email."','".$password1."','".$first_name."','".$last_name."','".$date_of_birth."','".$gender."')";
+			$sql = "INSERT INTO a0626094354.path_user (id, name,mobile,email,password,first_name,last_name,date_of_birth,gender )VALUES ('".$id."','".$first_name.$last_name."', '".$mobile."','".$email."','".$password1."','".$first_name."','".$last_name."','".$date_of_birth."','".$gender."')";
 			log_action($sql);
 			$result = $mydm->inserts($sql);
 			HTTPStatus(201);
 		}else if($action == 'LOGIN'){
 			// 430 upgrade 431 validate email
 			$sql = "SELECT * FROM a0626094354.path_user WHERE name = '".$mUsername."' and password= '".$mPassword."' limit 0,1";
+			log_action($sql);
 			$rows = $mydm->SELECT($sql);
 			if(empty($rows)){
 				HTTPStatus(401);
