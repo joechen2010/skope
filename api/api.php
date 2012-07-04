@@ -25,6 +25,8 @@
 		$toId = $_REQUEST['toId'];
 		$message = $_REQUEST['message'];
 
+		$favoriteId = $_REQUEST['favoriteId'];
+		$filter = $_REQUEST['filter'];
 
 		$relationship_status = $_REQUEST['relationship_status'];
 		$home_town = $_REQUEST['home_town'];
@@ -40,9 +42,10 @@
 		$mPassword = $_REQUEST['mPassword'];
 		$version_code = $_REQUEST['version_code'];
 		
-		$chatAction = $_REQUEST['chatAction'];
+		$subAction = $_REQUEST['subAction'];
 
 		$sql = "";
+		$mobile = "";
 		
 		if($action == 'LOCATION'){
 			$sql = "INSERT INTO a0626094354.gpsinfo (name ,mobile,address,city,street,latitude,longitude )VALUES ('".$name."', '".$mobile."','".$addr."','".$city."','".$street."','".$latitude."','".$longitude."')";
@@ -63,6 +66,18 @@
 			}
 		}else if($action == 'LOGOUT'){
 			
+		}else if($action == 'FAVORITES'){
+			if($subAction == 'ADD'){
+				$sql = "INSERT INTO a0626094354.favorites (userid ,favoriteId)VALUES ('".$id."', '".$favoriteId."')";
+				$result = $mydm->inserts($sql);
+			}if($subAction == 'DELETE'){
+				$sql = "delete from  a0626094354.favorites where userid = '".$id."' and favoriteId = '".$favoriteId."')";
+				$result = $mydm->inserts($sql);
+			}if($subAction == 'READ'){
+				$sql = "SELECT * from  a0626094354.path_user where id in ( select favoriteId FROM a0626094354.favorites WHERE userid = '".$id."')";
+				 $rows = $mydm->SELECT($sql);
+				 echo json_encode($rows);
+			}
 		}else if($action == 'READUSER'){
 			$sql = "SELECT * FROM a0626094354.path_user WHERE id = '".$id."'";
 			$rows = $mydm->SELECT($sql);
@@ -82,13 +97,30 @@
 				HTTPStatus(401);
 			}
 		}else if($action == 'CHAT'){
-			if($chatAction == 'CHAT'){
+			if($subAction == 'CHAT'){
 				$sql = "INSERT INTO a0626094354.chat_message (id ,user_from_id,message )VALUES ('".$id."', '".$user_from_id."','".$message."')";
 				$result = $mydm->inserts($sql);
-			}else if($chatAction == 'countNew'){
-				$sql = "select * a0626094354.chat_message WHERE read = false";
-				$result = $mydm->inserts($sql);
-			} 
+			}else if($subAction == 'countNew'){
+				$sql = "select count(1) as count a0626094354.chat_message WHERE read = false";
+				$rows = $mydm->SELECT($sql);
+				echo json_encode($rows);
+			}else if($subAction == 'READCHATS'){
+				$sql = "select * a0626094354.chat_message WHERE id = '".$id."'";
+				if (strlen(strstr($filter,'NEW'))>0) {
+					$sql = $sql.' and isRead=false';
+				}
+				if (strlen(strstr($filter,'MARK_AS_READ'))>0) {
+					$sql = $sql.' and mark_as_read=true';
+				}
+				if (strlen(strstr($filter,'FROM'))>0) {
+					$sql = $sql.' and user_from_id = '".$user_from_id."'";
+				}
+				if (strlen(strstr($filter,'LAST'))>0) {
+					$sql = $sql.' limit 0 ,1 order by timestamp desc';
+				}
+				$rows = $mydm->SELECT($sql);
+				echo json_encode($rows);
+			}  
 		}else{
 			$sql = "SELECT name ,mobile,address,city,street,latitude,longitude,timestamp FROM a0626094354.gpsinfo WHERE name = '".$name."' order by timestamp desc limit 0,20 ";
 			if($limit != null && $offset != null)

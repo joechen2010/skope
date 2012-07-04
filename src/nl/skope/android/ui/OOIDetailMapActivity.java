@@ -609,7 +609,7 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 	        client.setUsernamePassword(username, password);
 	        client.addParam("id", String.valueOf(userId));
 	        client.addParam("favoriteId", params[0].toString());
-	        client.addParam("favoriteAction", "ADD");
+	        client.addParam("subAction", "ADD");
 	        client.addParam("action", APIAction.FAVORITES.getName());
 	        // Send HTTP request to web service
 	        try {
@@ -677,7 +677,7 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 	        client.setUsernamePassword(username, password);
 	        client.addParam("id", String.valueOf(userId));
 	        client.addParam("favoriteId", params[0].toString());
-	        client.addParam("favoriteAction", "DELETE");
+	        client.addParam("subAction", "DELETE");
 	        client.addParam("action", APIAction.FAVORITES.getName());
 	        // Send HTTP request to web service
 	        try {

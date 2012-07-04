@@ -1,7 +1,7 @@
 CHAT: 
 1.count new message
 			client.addParam("id", String.valueOf(params[3]));
-	        client.addParam("chatAction", "COUNTNEW");
+	        client.addParam("subAction", "COUNTNEW");
 	        client.addParam("action", APIAction.CHAT.getName());
 
 2.chat
@@ -28,9 +28,9 @@ LOGOUT:
         	client.addParam("action", APIAction.LOGOUT.getName());
 	       
 FAVORITES: add and delete,READ	      
-	     client.addParam("id", String.valueOf(userId));
+	     	client.addParam("id", String.valueOf(userId));
 	        client.addParam("favoriteId", params[0].toString());
-	        client.addParam("favoriteAction", "ADD");
+	        client.addParam("subAction", "ADD");
 	        client.addParam("action", APIAction.FAVORITES.getName());
 	        
 REPORT:	        client.addParam("message", (String) params[1]);
@@ -63,11 +63,11 @@ REGISTRATION:
 PHOTO: 	DELETE,		
 			client.addParam("id", userId.toString());
 	        client.addParam("action", APIAction.PHOTO.getName());
-	        client.addParam("photoAction", "DELETE");
+	        client.addParam("subAction", "DELETE");
 	        client.addParam("photoid", String.valueOf(UserPhoto.this.mId));
 		READ
 		client.addParam("id", String.valueOf(userId));
-        client.addParam("photoAction", "READ");
+        client.addParam("subAction", "READ");
         client.addParam("action", APIAction.PHOTOS.getName());
 
 

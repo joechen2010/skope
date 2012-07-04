@@ -335,7 +335,7 @@ public class WorkerThread extends Thread {
         client.setUseBasicAuthentication(true);
         client.setUsernamePassword(username, password);
         client.addParam("id", String.valueOf(userId));
-        client.addParam("favoriteAction", "READ");
+        client.addParam("subAction", "READ");
         client.addParam("action", APIAction.FAVORITES.getName());
         // Send HTTP request to web service
         try {
@@ -471,7 +471,7 @@ public class WorkerThread extends Thread {
         client.setUsernamePassword(username, password);
         client.addParam("id", String.valueOf(userId));
         client.addParam("action", APIAction.CHAT.getName());
-        client.addParam("chatAction", "READ");
+        client.addParam("subAction", "READ");
         // Send HTTP request to web service
         try {
             client.execute(RequestMethod.GET);
@@ -575,33 +575,30 @@ public class WorkerThread extends Thread {
 		String username = mCache.getPreferences().getString(SkopeApplication.PREFS_USERNAME, "");
 		String password = mCache.getPreferences().getString(SkopeApplication.PREFS_PASSWORD, "");
 		String serviceUrl = mCache.getServiceUrl();//String.format("%s/user/%d/chat/%d/", mCache.getProperty("service_url"),userId ,	userFromId);
-		String chatAction = "";
+		String filter = "";
 		if (filterUnreadMessages) {
-			chatAction += "NEW";
+			filter += "NEW";
 		}
 		
 		if (markAsRead) {
-			if (filterUnreadMessages) {
-				chatAction += "MARK_AS_READ";
-			} else {
-				chatAction += "MARK_AS_READ";
+			if(!"".equals(filter)){
+				filter += ",";
 			}
+			filter += "MARK_AS_READ";
 		}
 		
 		if (filterFrom) {
-			if (filterUnreadMessages || markAsRead) {
-				chatAction += "FROM";				
-			} else {
-				chatAction += "FROM";
+			if(!"".equals(filter)){
+				filter += ",";
 			}
+			filter += "FROM";
 		}
 		
 		if (lastMessage) {
-			if (filterUnreadMessages || markAsRead || filterFrom) {
-				chatAction += "LAST";
-			} else {
-				chatAction += "LAST";
+			if(!"".equals(filter)){
+				filter += ",";
 			}
+			filter += "LAST";
 		}
 		
 		// Set up HTTP client
@@ -609,7 +606,9 @@ public class WorkerThread extends Thread {
         client.setUseBasicAuthentication(true);
         client.setUsernamePassword(username, password);
         client.addParam("id", String.valueOf(userId));
-        client.addParam("chatAction", chatAction);
+        client.addParam("user_from_id", String.valueOf(userFromId));
+        client.addParam("subAction", "READCHATS");
+        client.addParam("filter", filter);
         client.addParam("action", APIAction.CHAT.getName());
         // Send HTTP request to web service
         try {

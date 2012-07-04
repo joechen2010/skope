@@ -61,7 +61,15 @@ CREATE TABLE chat_message
 ) ENGINE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
 ;
 
-
+CREATE TABLE favorites
+(
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  userid BIGINT,               
+  favoriteId BIGINT,           
+  timestamp timestamp DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_favorites_id (id ASC)
+) ENGINE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+;
 
 
 

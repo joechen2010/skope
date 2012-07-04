@@ -73,7 +73,7 @@ public class UserSignupActivity extends BaseActivity {
 
 			// Add POST parameters
 			mForm = args[0];
-			client.addHeader("action", APIAction.SIGNUP.getName());
+			client.addParam("action", APIAction.SIGNUP.getName());
 			client.addParam("email", mForm.email.toLowerCase());
 			client.addParam("password1", mForm.password1);
 			client.addParam("password2", mForm.password2);

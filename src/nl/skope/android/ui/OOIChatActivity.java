@@ -438,7 +438,7 @@ public class OOIChatActivity extends BaseActivity {
 			client.addParam("action", APIAction.CHAT.getName());
 			client.addParam("id", params[4]);
 			client.addParam("toId", params[5]);
-			client.addParam("chatAction", "CHAT");
+			client.addParam("subAction", "CHAT");
 
 			// Send HTTP request to web service
 			try {

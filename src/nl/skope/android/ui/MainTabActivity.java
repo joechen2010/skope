@@ -238,7 +238,7 @@ public class MainTabActivity extends TabActivity {
 			client.setUseBasicAuthentication(true);
 			client.setUsernamePassword(params[1], params[2]);
 			client.addParam("id", String.valueOf(params[3]));
-	        client.addParam("chatAction", "COUNTNEW");
+	        client.addParam("subAction", "COUNTNEW");
 	        client.addParam("action", APIAction.CHAT.getName());
 			// Send HTTP request to web service
 			try {

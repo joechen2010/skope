@@ -21,7 +21,7 @@
     <string name="login_update_title">Update Skope</string>
     <string name="login_update_message">There is an update available for Skope. Please download and install the latest version.</string>
     <string name="login_update_ok">Update</string>
-    <string name="error_server_error">Sorry, there was a server error. We\&apos;re on it.</string>
+    <string name="error_server_error">发生内部错误.</string>
     <string name="error_connection_failed">Please make sure you are connected to the internet.</string>
     <string name="error_username_password">Invalid username or password</string>
     <string name="error_image_upload_not_found">Sorry, image upload failed</string>
