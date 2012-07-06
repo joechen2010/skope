@@ -1,117 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Skope</string>
+    <string name="app_name">轨迹</string>
     <!-- DEBUG <string name="maps_api_key">0C3qD704heE7tJLoDlJFfMgTBhd453_mAxwsosw</string> -->
     <!-- PRIVATE --><string name="maps_api_key">0C3qD704heE6cUdySBC0j5xKSlqJDg-fuQR9_tA</string> 
-    <string name="service_description">Skope location service</string>
-    <string name="public_beta">This is a public beta release. Please send us your feedback if you have any problems or good ideas. http://sko.pe/feedback</string>
+    <string name="service_description">位置服务</string>
+    <string name="public_beta">BETA版本，有问题请联系 http://sko.pe/feedback</string>
     <string name="main_no_items">找不到数据</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="ok">OK</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="ok">确定</string>
     <string name="quit">退出</string>
-    <string name="really_quit">Quit</string>
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
-    <string name="delete">Delete</string>
-    <string name="at">at</string>
-    <string name="send">Send</string>
-    <string name="yesterday">Yesterday</string>
-    <string name="retrieving_data">Please wait…</string>
-    <string name="login_update_title">Update Skope</string>
-    <string name="login_update_message">There is an update available for Skope. Please download and install the latest version.</string>
-    <string name="login_update_ok">Update</string>
+    <string name="really_quit">退出</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="delete">删除</string>
+    <string name="at">在</string>
+    <string name="send">发送</string>
+    <string name="yesterday">昨天</string>
+    <string name="retrieving_data">请稍候…</string>
+    <string name="login_update_title">更新</string>
+    <string name="login_update_message">有更新了，请下载最新版本.</string>
+    <string name="login_update_ok">更新</string>
     <string name="error_server_error">发生内部错误.</string>
-    <string name="error_connection_failed">Please make sure you are connected to the internet.</string>
-    <string name="error_username_password">Invalid username or password</string>
-    <string name="error_image_upload_not_found">Sorry, image upload failed</string>
-    <string name="error_profile_picture_result">There was a problem saving your new profile picture.</string>
+    <string name="error_connection_failed">请确保您已经连接到网络.</string>
+    <string name="error_username_password">用户名密码无效</string>
+    <string name="error_image_upload_not_found">抱歉，上传失败</string>
+    <string name="error_profile_picture_result">保存图片时发生了错误.</string>
     <string name="no_location_message">It seems the application cannot determine your location. It might take a while to receive the most recent location, please try again later.</string>
     <string name="no_location_message_disabled">It seems the location services on this device are disabled. Skope needs your location to find objects of interest in your area. Please enable one of the location services in your device settings.</string>
-    <string name="no_location_title">No location</string>
-    <string name="no_location_ok">Open settings</string>
-    <string name="no_result_message">There seems to be a problem with connecting to the server.</string>
-    <string name="no_result_title">No server response&#8230;</string>
-    <string name="menu_user">User</string>
+    <string name="no_location_title">无地理位置</string>
+    <string name="no_location_ok">打开设置</string>
+    <string name="no_result_message">连接服务器异常.</string>
+    <string name="no_result_title">服务端无返回&#8230;</string>
+    <string name="menu_user">用户</string>
     <string name="menu_range">Skope range</string>
-    <string name="menu_refresh">Refresh</string>
-    <string name="menu_phone_number">Phone number</string>
-    <string name="location_service_stopped">Skope location service stopped</string>
-    <string name="location_service_started">Skope service running&#8230;</string>
-    <string name="location_service_label">Skope</string>
-    <string name="button_label_listview">List</string>
-    <string name="button_label_mapview">Map</string>
-    <string name="login_button_login">Login</string>
-    <string name="login_button_signup">Sign up</string>
-    <string name="login_hint_user">Email</string>
-    <string name="login_hint_password">Password</string>
+    <string name="menu_refresh">刷新</string>
+    <string name="menu_phone_number">手机号码</string>
+    <string name="location_service_stopped">位置服务已关闭</string>
+    <string name="location_service_started">位置服务正在运行&#8230;</string>
+    <string name="location_service_label">轨迹</string>
+    <string name="button_label_listview">列表</string>
+    <string name="button_label_mapview">地图</string>
+    <string name="login_button_login">登录</string>
+    <string name="login_button_signup">注册</string>
+    <string name="login_hint_user">邮箱</string>
+    <string name="login_hint_password">密码</string>
     <string name="mystore_password">g3h31m</string>
-    <string name="prefs_gps_title">Use GPS</string>
+    <string name="prefs_gps_title">使用GPS</string>
     <string name="prefs_gps_summary">Let the Skope location service make use of GPS (more accurate, but heavier battery usage)</string>
     <string name="prefs_gps_global_title">GPS</string>
-    <string name="prefs_gps_global_on">GPS on this device is currently enabled. Click here to change.</string>
-    <string name="prefs_gps_global_off">GPS on this device is currently disabled. Click here to change.</string>
-    <string name="home_status_empty">Tap to update your status&#8230;</string>
-    <string name="signup_title">Create a Skope account</string>
-    <string name="signup_hint_email">Email</string>
-    <string name="signup_hint_password">Password</string>
-    <string name="signup_hint_confirm">Confirm</string>
-    <string name="signup_email_text">Will never be published or shared</string>
-    <string name="signup_button_signup">Sign up</string>
-    <string name="signup_validation_required_fields">Please fill out all the fields</string>
-    <string name="take_with_camera">Take with camera</string>
-    <string name="choose_camera">Select camera</string>
+    <string name="prefs_gps_global_on">手机的GPS已经打开. 点击更改.</string>
+    <string name="prefs_gps_global_off">手机的GPS已经关闭. 点击更改.</string>
+    <string name="home_status_empty">更新心情&#8230;</string>
+    <string name="signup_title">注册帐号</string>
+    <string name="signup_hint_email">邮箱</string>
+    <string name="signup_hint_password">密码</string>
+    <string name="signup_hint_confirm">确认密码</string>
+    <string name="signup_email_text">不会对外公开</string>
+    <string name="signup_button_signup">注册</string>
+    <string name="signup_validation_required_fields">请填写所有项</string>
+    <string name="take_with_camera">拍照</string>
+    <string name="choose_camera">拍照</string>
     <string name="select_from_gallery">Select from gallery</string>
-    <string name="choose_gallery">Select media source</string>
+    <string name="choose_gallery">图库</string>
     <string name="user_form_first_name">First name</string>
     <string name="user_form_last_name">Last name</string>
-    <string name="user_form_date_of_birth">What\&apos;s your birthday?</string>
-    <string name="user_form_home_town">Home town</string>
-    <string name="user_form_work">Where do you work?</string>
-    <string name="user_form_work_job_title">Job title</string>
-    <string name="user_form_work_company">Company</string>
-    <string name="user_form_education">What\&apos;s your education?</string>
-    <string name="user_form_education_study">Studied</string>
-    <string name="user_form_education_college">College</string>
-    <string name="user_form_show_profile">Show in profile</string>
-    <string name="user_form_relationship">Relationship status:</string>
+    <string name="user_form_date_of_birth">生日</string>
+    <string name="user_form_home_town">家乡</string>
+    <string name="user_form_work">在哪工作?</string>
+    <string name="user_form_work_job_title">职位</string>
+    <string name="user_form_work_company">公司</string>
+    <string name="user_form_education">教育</string>
+    <string name="user_form_education_study">学历</string>
+    <string name="user_form_education_college">大学</string>
+    <string name="user_form_show_profile">在资料中显示</string>
+    <string name="user_form_relationship">关系状态:</string>
     <string-array name="user_relationship_choices">
-        <item>Single</item>
-        <item>In a relationship</item>
-        <item>Engaged</item>
-        <item>Married</item>
-        <item>Separated</item>
-        <item>Divorced</item>
-        <item>Widowed</item>
-        <item>In a civil union</item>
-        <item>In a domestic partnership</item>
+        <item>单身</item>
+        <item>恋爱中</item>
+        <item>订婚</item>
+        <item>已婚</item>
+        <item>分居</item>
+        <item>离婚</item>
+        <item>丧偶</item>
+        <item>个体</item>
+        <item>合作</item>
     </string-array>
-    <string name="user_gender_male">Male</string>
-    <string name="user_gender_female">Female</string>
+    <string name="user_gender_male">男</string>
+    <string name="user_gender_female">女</string>
     <string-array name="user_gender_choices">
         <item>@string/user_gender_male</item>
         <item>@string/user_gender_female</item>
     </string-array>
-    <string name="user_form_gender">I\&apos;m</string>
-    <string name="user_about_me">About me</string>
-    <string name="user_thumbnail_add">Set your profile picture&#8230;</string>
-    <string name="edit">Edit profile</string>
-    <string name="user_profile_uploading_image">Uploading image&#8230;</string>
-    <string name="user_photos_retrieving">Retrieving user photos&#8230;</string>
-    <string name="user_photos_add">Add photo</string>
-    <string name="user_photos_none">No photos added yet</string>
+    <string name="user_form_gender">我是</string>
+    <string name="user_about_me">关于</string>
+    <string name="user_thumbnail_add">更新头像&#8230;</string>
+    <string name="edit">编辑资料</string>
+    <string name="user_profile_uploading_image">正在上传相片&#8230;</string>
+    <string name="user_photos_retrieving">正在加载相片&#8230;</string>
+    <string name="user_photos_add">添加相片</string>
+    <string name="user_photos_none">还没添加相片</string>
     <string name="crash_toast_text">Unfortunately Skope just crashed. Please send us the crash report so we can fix things.</string>
-    <string name="favorites">Favorites</string>
-    <string name="photos">Photos</string>
-    <string name="user_favorite_confirm_remove_title">Remove favorite</string>
-    <string name="user_favorite_confirm_remove_message">Are you sure you want to remove %s from your favorites?</string>
-    <string name="user_favorite_confirm_add_title">Add favorite</string>
-    <string name="user_favorite_confirm_add_message">Add %s to your favorites?</string>
+    <string name="favorites">关注</string>
+    <string name="photos">相片</string>
+    <string name="user_favorite_confirm_remove_title">取消关注</string>
+    <string name="user_favorite_confirm_remove_message">确定要取消对 %s的关注?</string>
+    <string name="user_favorite_confirm_add_title">关注</string>
+    <string name="user_favorite_confirm_add_message">关注 %s?</string>
     <string name="user_report_title">Report user</string>
     <string name="user_report_message">If you have found %s to behave inappropriately, please let us know and we will take immediate action.</string>
     <string name="facebook_connect_confirm_title">Connect with Facebook?</string>
     <string name="facebook_connect_confirm_message">Facebook Connect will make use of your Facebook profile information and profile picture and place occasional updates on your wall. Proceed?</string>
     <string name="facebook_disconnect_confirm_title">Disconnect from Facebook?</string>
     <string name="facebook_disconnect_confirm_message">This will stop Skope from accessing your profile information and placing updates on your wall. Your current profile information will go unchanged. Proceed?</string>
-    <string name="message_received">You have received a message</string>
+    <string name="message_received">有新消息</string>
 </resources>
