@@ -16,7 +16,7 @@
 
 package com.facebook.android;
 
-import nl.skope.android.R;
+import com.joe.track.android.R;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;

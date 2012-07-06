@@ -112,6 +112,6 @@
     <string name="facebook_connect_confirm_title">Connect with Facebook?</string>
     <string name="facebook_connect_confirm_message">Facebook Connect will make use of your Facebook profile information and profile picture and place occasional updates on your wall. Proceed?</string>
     <string name="facebook_disconnect_confirm_title">Disconnect from Facebook?</string>
-    <string name="facebook_disconnect_confirm_message">This will stop Skope from accessing your profile information and placing updates on your wall. Your current profile information will go unchanged. Proceed?</string>
+    <string name="facebook_disconnect_confirm_message">This will stop Track from accessing your profile information and placing updates on your wall. Your current profile information will go unchanged. Proceed?</string>
     <string name="message_received">有新消息</string>
 </resources>

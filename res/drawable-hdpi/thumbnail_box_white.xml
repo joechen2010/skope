@@ -6,7 +6,7 @@
         android:width="2dip"
         android:color="@android:color/white" />
 
-    <solid android:color="@color/skope_grey" />
+    <solid android:color="@color/track_grey" />
 
     <padding
         android:bottom="2dip"

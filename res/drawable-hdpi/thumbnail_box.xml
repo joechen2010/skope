@@ -4,8 +4,8 @@
     <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
     <stroke
         android:width="2dip"
-        android:color="@color/skope_grey_dark"/>
-    <solid android:color="@color/skope_grey"/>
+        android:color="@color/track_grey_dark"/>
+    <solid android:color="@color/track_grey"/>
     <padding android:left="2dip"
         android:top="2dip"
         android:right="2dip"

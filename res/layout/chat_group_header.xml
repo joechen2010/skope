@@ -12,7 +12,7 @@
         android:layout_height="1dip"
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip"
-        android:background="@color/skope_grey" >
+        android:background="@color/track_grey" >
     </FrameLayout>
 
     <TextView
@@ -22,6 +22,6 @@
         android:layout_centerInParent="true"
         android:padding="5dip"
         android:text=""
-        android:textColor="@color/skope_grey_dark" />
+        android:textColor="@color/track_grey_dark" />
 
 </RelativeLayout>

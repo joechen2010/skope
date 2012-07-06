@@ -4,8 +4,8 @@
         <shape android:shape="rectangle">
             <stroke
                 android:width="2dip"
-                android:color="@color/skope_yellow"/>
-            <solid android:color="@color/skope_grey"/>
+                android:color="@color/track_yellow"/>
+            <solid android:color="@color/track_grey"/>
             <padding android:left="2dip"
                 android:top="2dip"
                 android:right="2dip"
@@ -16,8 +16,8 @@
         <shape android:shape="rectangle">
             <stroke
                 android:width="2dip"
-                android:color="@color/skope_grey_dark"/>
-            <solid android:color="@color/skope_grey"/>
+                android:color="@color/track_grey_dark"/>
+            <solid android:color="@color/track_grey"/>
             <padding android:left="2dip"
                 android:top="2dip"
                 android:right="2dip"

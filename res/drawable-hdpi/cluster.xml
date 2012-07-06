@@ -2,8 +2,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/cluster_indicator">
 		<shape android:shape="oval">
-			<stroke android:width="6dip" android:color="@color/skope_yellow" />
-			<solid android:color="@color/skope_grey"/>
+			<stroke android:width="6dip" android:color="@color/track_yellow" />
+			<solid android:color="@color/track_grey"/>
 			<size android:height="50dip" android:width="50dip" />
 		</shape>
 	</item>

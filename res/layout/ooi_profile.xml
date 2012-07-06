@@ -74,7 +74,7 @@
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:background="@color/skope_grey"
+            android:background="@color/track_grey"
             android:layout_marginLeft="5dip"
             android:layout_marginRight="5dip">
             
@@ -93,7 +93,7 @@
 	    <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:background="@color/skope_grey"
+            android:background="@color/track_grey"
             android:layout_marginLeft="5dip"
             android:layout_marginRight="5dip">
             

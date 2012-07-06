@@ -42,7 +42,7 @@
         android:id="@+id/frameLayout2"
         android:layout_width="1dip"
         android:layout_height="match_parent"
-        android:background="@color/skope_grey_extra_dark" >
+        android:background="@color/track_grey_extra_dark" >
     </FrameLayout>
 
 </LinearLayout>

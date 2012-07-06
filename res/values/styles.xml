@@ -49,7 +49,7 @@
    		<item name="android:layout_height">34dip</item>
    	</style>
    	<style name="RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
-   		<item name="android:textColor">@color/skope_grey_dark</item>
+   		<item name="android:textColor">@color/track_grey_dark</item>
    	</style>
    	
     

@@ -11,7 +11,7 @@
 			android:background="@drawable/detail_button_favorite_selector"
 			android:layout_gravity="center|center_vertical" />
 	</FrameLayout>
-	<FrameLayout android:background="@color/skope_grey_extra_dark"
+	<FrameLayout android:background="@color/track_grey_extra_dark"
 		android:layout_marginTop="10dip" android:layout_marginBottom="10dip"
 		android:layout_height="match_parent" android:layout_width="1dip"
 		android:id="@+id/frameLayout2"></FrameLayout>
