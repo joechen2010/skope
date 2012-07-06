@@ -3,12 +3,10 @@ package nl.skope.android.http;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
@@ -52,7 +50,6 @@ import org.apache.http.protocol.HTTP;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -277,9 +274,16 @@ public class CustomHttpClient {
 
 	private void executeRequest(HttpUriRequest request, String url) throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException, KeyManagementException, UnrecoverableKeyException {
 		HostnameVerifier hostnameVerifier = SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
-
+		
+		String proxyHost = "cngzip01.mgmt.ericsson.se";
+		
 		HttpClient client = new DefaultHttpClient();
-
+		
+		/*if (proxyHost != null) {
+    		HttpHost proxy = new HttpHost(proxyHost, 8080);
+    		client.getParams().setParameter(ConnRouteParams.DEFAULT_PROXY,
+					proxy);
+		}*/
 		SchemeRegistry registry = new SchemeRegistry();
 		registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
 		SSLSocketFactory socketFactory = SSLSocketFactory.getSocketFactory();

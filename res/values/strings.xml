@@ -5,11 +5,11 @@
     <!-- PRIVATE --><string name="maps_api_key">0C3qD704heE6cUdySBC0j5xKSlqJDg-fuQR9_tA</string> 
     <string name="service_description">Skope location service</string>
     <string name="public_beta">This is a public beta release. Please send us your feedback if you have any problems or good ideas. http://sko.pe/feedback</string>
-    <string name="main_no_items">Nothing found</string>
+    <string name="main_no_items">找不到数据</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="ok">OK</string>
-    <string name="quit">Quit</string>
+    <string name="quit">退出</string>
     <string name="really_quit">Quit</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>

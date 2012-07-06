@@ -1,5 +1,6 @@
 <?PHP 
         require_once("config.config");
+        require_once("util.php");
         class Myphp
         {       
                 function myphp0()
@@ -10,6 +11,9 @@
                                 return $server;
                         }
                  }
+                 
+                 
+                 
                  //²åÈë
                  function inserts($sqlsk)
                  {
@@ -17,7 +21,8 @@
                           $link = mysql_connect($server,$username,$password); 
                           if (!$link) 
                           {
-                                die('Could not connect: ' . mysql_error());
+                          		log_action(mysql_error());
+                                //die('Could not connect: ' . mysql_error());
                           }
                           mysql_query($sqlsk);
 						  $affected_rows = mysql_error();//mysql_affected_rows();
@@ -26,30 +31,36 @@
                           mysql_close($link);
 						  return $affected_rows;
                  }
+                 
+                 
+                 
+                 
+                 
                  //²éÑ¯
                  function SELECT($sql)
                  {
+                 		
                         global $server,$username,$password;
                         $link = mysql_connect($server,$username,$password); 
                         if (!$link) 
-                        {
-                        die('Could not connect: ' . mysql_error());
-                 }
+                        {	log_action(mysql_error()+"....");
+                 		}
                 $result = mysql_query($sql);
-                if (!$result) 
-                        {
-                        die('Could not select: ' . mysql_error());
-                 }
-                    if (mysql_num_rows($result) == 0) 
-                        {
-                        die('Could not select: ' . mysql_error());
+                if (!$result) {
+                	    log_action(mysql_error());
+                }
+                if (mysql_num_rows($result) == 0){
+                	    log_action(mysql_error());
                  }
 				 $rows = array();
+				 
                 while ($row = mysql_fetch_assoc($result)){
                         $rows[] = $row;
+                        
                  }
 				  mysql_free_result($result);
                   mysql_close($link);
+                  
 				  return $rows;
                 } 
         }

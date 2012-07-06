@@ -157,7 +157,7 @@ public class LoginActivity extends BaseActivity {
          
         // Send HTTP request to web service
         try {
-            client.execute(RequestMethod.GET);
+            client.execute(RequestMethod.POST);
         } catch (Exception e) {
         	// Most exceptions already handled by client
             e.printStackTrace();
@@ -228,7 +228,7 @@ public class LoginActivity extends BaseActivity {
 		/**
 		 * C2DM Registration
 		 */
-		String registrationId = getCache().getPreferences().getString(
+		/*String registrationId = getCache().getPreferences().getString(
 				SkopeApplication.PREFS_C2DM_REGISTRATIONID, "");
 
 		// Determine age of registration ID
@@ -249,7 +249,7 @@ public class LoginActivity extends BaseActivity {
 			c2dmIntent.putExtra("sender", "google@sko.pe");
 			// Start registration
 			startService(c2dmIntent);
-		}
+		}*/
 		
 		
 
@@ -291,14 +291,14 @@ public class LoginActivity extends BaseActivity {
 			            	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getCache().getProperty("upgrade_url")));
 			            	startActivity(browserIntent);
 			            }
-			        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 			            public void onClick(DialogInterface dialog, int whichButton) {
 			                // Do nothing.
 			            }
 			        }).show();
 		        	break;
 		        case 431: // EMAIL NOT VERIFIED
-		        	Toast.makeText(LoginActivity.this, "Please verify you email address and password", Toast.LENGTH_SHORT).show();
+		        	Toast.makeText(LoginActivity.this, "请确认您的邮箱和帐号是否正确", Toast.LENGTH_SHORT).show();
 		        	break;
 		        /*case HttpStatus.SC_PAYMENT_REQUIRED:
 		        	Toast.makeText(LoginActivity.this, "You have a payment due", Toast.LENGTH_SHORT).show();
@@ -315,7 +315,7 @@ public class LoginActivity extends BaseActivity {
 		
 		// can use UI thread here
 		protected void onPreExecute() {
-			mDialog.setMessage("Contacting server...");
+			mDialog.setMessage("正在连接服务器...");
 			mDialog.show();
 		}
 		

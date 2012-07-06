@@ -44,7 +44,6 @@ function HTTPStatus($num) {
     );
  
     header($http[$num]);
- 	exit;
     /*return
         array(
             'responseCode' => $num,

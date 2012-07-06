@@ -1,7 +1,10 @@
 <?php 
         require_once("data.php");
         require_once("httpStatus.php");
+        require_once("util.php");
+        require_once("Response.php");
         $mydm = new Myphp();
+        $response = new Response();
 		$name = $_REQUEST['name'];
 		$addr = $_REQUEST['addr'];
 		$mobile = $_REQUEST['mobile'];
@@ -39,33 +42,38 @@
 		$description = $_REQUEST['description'];
 		
 		
-		$username = $_REQUEST['username'];//$data['username'];
-		$password = $_REQUEST['password'];//$_SERVER['PHP_AUTH_PW'];
+		$user_name = $_REQUEST['username'];//$data['username'];
+		$pass_word = $_REQUEST['password'];//$_SERVER['PHP_AUTH_PW'];
 		$version_code = $_REQUEST['version_code'];
 		
 		$subAction = $_REQUEST['subAction'];
 
 		$sql = "";
 		$mobile = "";
-		$s = $action.'--'.$username.'--'.$password;
-		log_action($s);
 		if($action == 'LOCATION'){
 			$sql = "INSERT INTO a0626094354.gpsinfo (name ,mobile,address,city,street,latitude,longitude )VALUES ('".$name."', '".$mobile."','".$addr."','".$city."','".$street."','".$latitude."','".$longitude."')";
 			$result = $mydm->inserts($sql);
 		}else if($action == 'SIGNUP'){
 			$sql = "INSERT INTO a0626094354.path_user (id, name,mobile,email,password,first_name,last_name,date_of_birth,gender )VALUES ('".$id."','".$first_name.$last_name."', '".$mobile."','".$email."','".$password1."','".$first_name."','".$last_name."','".$date_of_birth."','".$gender."')";
-			log_action($sql);
 			$result = $mydm->inserts($sql);
 			HTTPStatus(201);
+			echo json_encode("×¢²á³É¹¦");
 		}else if($action == 'LOGIN'){
 			// 430 upgrade 431 validate email
-			$sql = "SELECT * FROM a0626094354.path_user WHERE email = '".$username."' and password= '".$password."' limit 0,1";
+			$sql = "SELECT * FROM a0626094354.path_user WHERE email = '".$user_name."' and password= '".$pass_word."' limit 0,1";
 			log_action($sql);
 			$rows = $mydm->SELECT($sql);
-			if(empty($rows)){
+			$result = count($rows);
+			if($result <= 0){
 				HTTPStatus(401);
 			}else{
-				echo json_encode($rows);
+				$userid = $rows[0]['id'];
+				$json = json_encode($rows);
+				$json = str_replace("[","",$json); 
+				$json = str_replace("]","",$json); 
+				$json = "{'id':'".$userid."','user':".$json."}";
+				echo $json;
+				//$response->ajaxReturn($rows);
 			}
 		}else if($action == 'LOGOUT'){
 			
@@ -87,7 +95,7 @@
 			if(empty($rows)){
 				HTTPStatus(401);
 			}else{
-				echo json_encode($rows);
+				$response->ajaxReturn($rows);
 			}
 		}else if($action == 'INFO'){
 			$sql = "update a0626094354.path_user set first_name='".$first_name."',last_name='".$last_name."',date_of_birth='".$date_of_birth."',gender='".$gender."',relationship_status='".$relationship_status."',home_town='".$home_town."',work_job_title='".$work_job_title."',work_company='".$work_company."',education_study='".$education_study."',education_college='".$education_college."',is_gender_public='".$is_gender_public."',is_date_of_birth_public='".$is_date_of_birth_public."' where id = '".$id."'";
@@ -132,38 +140,5 @@
 			echo json_encode($rows);
 		}
 		
-		
-		
-		
-		
-function log_action($msg) {
-	$today = date("d.m.Y");
-	$filename = "log/$today.txt";
-	if (!file_exists($filename)) {
-		chmod($filename, 0777);
-	}
-	$fd = fopen($filename, "a");
-	$str = "[" . date("d/m/Y h:i:s", mktime()) . "] " . $msg;
-	fwrite($fd, $str . PHP_EOL);
-	fclose($fd);
-	chmod($filename, 0644);
-}
- 
- 
- function contains($string,$substring) {
-        $pos = strpos($string, $substring);
- 
-        if($pos === false) {
-                // string needle NOT found in haystack
-                return false;
-        }
-        else {
-                // string needle found in haystack
-                return true;
-        }
- 
-}
-	
-
 
 ?>

@@ -108,7 +108,7 @@ public class UserSignupActivity extends BaseActivity {
 			} else if (httpResponseCode == HttpStatus.SC_CREATED) {
 				// The verification message is returned in the response
 				mVerificationMessage = client.getResponse();
-
+				mVerificationMessage = "注册成功，请登录";
 				// Store credentials
 				SharedPreferences.Editor prefsEditor = getCache().getPreferences().edit();
 				prefsEditor.putString(SkopeApplication.PREFS_USERNAME, mForm.email);
@@ -144,7 +144,7 @@ public class UserSignupActivity extends BaseActivity {
 							} catch (JSONException e) {
 								// Log exception
 								Log.e(TAG, e.toString());
-								Toast.makeText(UserSignupActivity.this, "Invalid form", Toast.LENGTH_SHORT).show();
+								Toast.makeText(UserSignupActivity.this, "填写不正确", Toast.LENGTH_SHORT).show();
 								return;
 							}
 		
@@ -263,7 +263,7 @@ public class UserSignupActivity extends BaseActivity {
 					null);
 			builder = new AlertDialog.Builder(this)
 			.setView(layout)
-			.setPositiveButton("OK",
+			.setPositiveButton("确定",
 					new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog,
@@ -279,7 +279,7 @@ public class UserSignupActivity extends BaseActivity {
 							+ "-" + year);
 				}
 			})
-			.setNegativeButton("Cancel",
+			.setNegativeButton("取消",
 					new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog,
@@ -290,7 +290,7 @@ public class UserSignupActivity extends BaseActivity {
 			break;
 		case DIALOG_VERIFICATION_SENT:
 			builder = new AlertDialog.Builder(this).setMessage(
-					mVerificationMessage).setPositiveButton("OK",
+					mVerificationMessage).setPositiveButton("确定",
 							new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog,
