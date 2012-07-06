@@ -82,7 +82,7 @@ public class OOIListActivity extends BaseActivity {
 	                nameTextView.setText(getCache().getUser().getStatus());
 	                getServiceQueue().postToService(Type.FIND_OBJECTS_OF_INTEREST, null);
 	            }
-	        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int whichButton) {
 	                // Do nothing.
 	            }
@@ -235,7 +235,7 @@ public class OOIListActivity extends BaseActivity {
                 		startActivity(intent);
                 		dialog.dismiss();
     	            }
-    	        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    	        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
     	            public void onClick(DialogInterface dialog, int whichButton) {
     	                // Do nothing.
     	            }

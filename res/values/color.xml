@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="skope_light">#FFFFCC33</color>
+	<color name="skope_light">#90EE90</color>
 	<color name="skope_dark">#FFFF9900</color>
-	<color name="skope_yellow">#efb549</color>
+	<color name="skope_yellow">#ffccddff</color>
 	<color name="skope_yellow_darker">#d29e3f</color>
-	<color name="skope_grey">#E6E6E6</color>
-	<color name="skope_grey_dark">#777</color>
-	<color name="skope_grey_extra_dark">#4D4D4D</color>
+	<color name="skope_grey">#ff58616d</color>
+	<color name="skope_grey_dark">#ff404040</color>
+	<color name="skope_grey_extra_dark">#ff888888</color>
 </resources>

@@ -6,17 +6,26 @@
         <item name="android:windowFrame">@null</item>
     </style>
     <style name="Button" parent="@android:style/Widget.Button">
+        <!--<item name="android:textSize">16.0dip</item>
+        <item name="android:textColor">#FFC0CB</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">40.0dip</item>
+        <item name="android:minHeight">40.0dip</item>
+         -->
         <item name="android:gravity">center_vertical|center_horizontal</item>
-        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textColor">#FFC0CB</item>
         <item name="android:textSize">14dip</item>
         <item name="android:textStyle">normal</item>
         <item name="android:background">@drawable/button_custom</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
+         
     </style>
     <style name="FacebookConnect" parent="@android:style/Widget.Button">
         <item name="android:gravity">center_vertical|center_horizontal</item>
-        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textColor">#FFC0CB</item>
         <item name="android:textSize">14dip</item>
         <item name="android:textStyle">normal</item>
         <item name="android:background">@drawable/button_fbconnect</item>
@@ -42,4 +51,6 @@
    	<style name="RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
    		<item name="android:textColor">@color/skope_grey_dark</item>
    	</style>
+   	
+    
 </resources>

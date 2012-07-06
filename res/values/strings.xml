@@ -4,7 +4,7 @@
     <!-- DEBUG <string name="maps_api_key">0C3qD704heE7tJLoDlJFfMgTBhd453_mAxwsosw</string> -->
     <!-- PRIVATE --><string name="maps_api_key">0C3qD704heE6cUdySBC0j5xKSlqJDg-fuQR9_tA</string> 
     <string name="service_description">位置服务</string>
-    <string name="public_beta">BETA版本，有问题请联系 http://sko.pe/feedback</string>
+    <string name="public_beta">BETA版本，有问题请联系 http://</string>
     <string name="main_no_items">找不到数据</string>
     <string name="yes">是</string>
     <string name="no">否</string>
@@ -26,14 +26,14 @@
     <string name="error_username_password">用户名密码无效</string>
     <string name="error_image_upload_not_found">抱歉，上传失败</string>
     <string name="error_profile_picture_result">保存图片时发生了错误.</string>
-    <string name="no_location_message">It seems the application cannot determine your location. It might take a while to receive the most recent location, please try again later.</string>
-    <string name="no_location_message_disabled">It seems the location services on this device are disabled. Skope needs your location to find objects of interest in your area. Please enable one of the location services in your device settings.</string>
+    <string name="no_location_message">暂时无法确定你的位置，你在火星吗?.</string>
+    <string name="no_location_message_disabled">GPS好像关闭了，要打开才可以搜索附近好友哦</string>
     <string name="no_location_title">无地理位置</string>
     <string name="no_location_ok">打开设置</string>
     <string name="no_result_message">连接服务器异常.</string>
     <string name="no_result_title">服务端无返回&#8230;</string>
     <string name="menu_user">用户</string>
-    <string name="menu_range">Skope range</string>
+    <string name="menu_range">区间</string>
     <string name="menu_refresh">刷新</string>
     <string name="menu_phone_number">手机号码</string>
     <string name="location_service_stopped">位置服务已关闭</string>
@@ -47,7 +47,7 @@
     <string name="login_hint_password">密码</string>
     <string name="mystore_password">g3h31m</string>
     <string name="prefs_gps_title">使用GPS</string>
-    <string name="prefs_gps_summary">Let the Skope location service make use of GPS (more accurate, but heavier battery usage)</string>
+    <string name="prefs_gps_summary">让轨迹使用GPS</string>
     <string name="prefs_gps_global_title">GPS</string>
     <string name="prefs_gps_global_on">手机的GPS已经打开. 点击更改.</string>
     <string name="prefs_gps_global_off">手机的GPS已经关闭. 点击更改.</string>
@@ -59,9 +59,9 @@
     <string name="signup_email_text">不会对外公开</string>
     <string name="signup_button_signup">注册</string>
     <string name="signup_validation_required_fields">请填写所有项</string>
-    <string name="take_with_camera">拍照</string>
+    <string name="take_with_camera">选图片</string>
     <string name="choose_camera">拍照</string>
-    <string name="select_from_gallery">Select from gallery</string>
+    <string name="select_from_gallery">从图库</string>
     <string name="choose_gallery">图库</string>
     <string name="user_form_first_name">First name</string>
     <string name="user_form_last_name">Last name</string>
@@ -100,7 +100,7 @@
     <string name="user_photos_retrieving">正在加载相片&#8230;</string>
     <string name="user_photos_add">添加相片</string>
     <string name="user_photos_none">还没添加相片</string>
-    <string name="crash_toast_text">Unfortunately Skope just crashed. Please send us the crash report so we can fix things.</string>
+    <string name="crash_toast_text">程序出现异常关闭了</string>
     <string name="favorites">关注</string>
     <string name="photos">相片</string>
     <string name="user_favorite_confirm_remove_title">取消关注</string>

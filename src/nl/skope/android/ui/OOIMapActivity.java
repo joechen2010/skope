@@ -325,7 +325,7 @@ public abstract class OOIMapActivity extends MapActivity {
             		startActivity(intent);
             		dialog.dismiss();
 	            }
-	        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	        }).setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int whichButton) {
 	                // Do nothing.
 	            }

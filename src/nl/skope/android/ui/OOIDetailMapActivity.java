@@ -140,7 +140,7 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 							});
 							runner.execute(mSelectedOOI.getId().intValue());
 			            }
-			        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 			            public void onClick(DialogInterface dialog, int whichButton) {
 			                // Do nothing.
 			            }
@@ -173,7 +173,7 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 							});
 							runner.execute(mSelectedOOI.getId().intValue());
 			            }
-			        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 			            public void onClick(DialogInterface dialog, int whichButton) {
 			                // Do nothing.
 			            }
@@ -236,7 +236,7 @@ public class OOIDetailMapActivity extends OOIMapActivity {
 						});
 						runner.execute(mSelectedOOI.getId(), description.getText().toString());
 		            }
-		        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+		        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 		            public void onClick(DialogInterface dialog, int whichButton) {
 		                // Do nothing.
 		            }

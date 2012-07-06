@@ -252,7 +252,7 @@ public class UserProfileActivity extends BaseActivity {
 		/*
 		 * FACEBOOK
 		 */
-		mFacebookConnect = (ToggleButton) findViewById(R.id.facebook_connect);
+		/*mFacebookConnect = (ToggleButton) findViewById(R.id.facebook_connect);
 		mFacebookConnect.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -270,7 +270,7 @@ public class UserProfileActivity extends BaseActivity {
 			            	mProfilePictureView.setClickable(false);
 			            	mChangeProfilePictureToFB = true;
 			            }
-			        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 			            public void onClick(DialogInterface dialog, int whichButton) {
 			                mFacebookConnect.setChecked(false);
 			            }
@@ -309,14 +309,14 @@ public class UserProfileActivity extends BaseActivity {
 			    			mProfilePictureView.setClickable(true);
 			    			mChangeProfilePictureToFB = false;
 			            }
-			        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 			            public void onClick(DialogInterface dialog, int whichButton) {
 			                mFacebookConnect.setChecked(true);
 			            }
 			        }).show();
 				}
 			}
-		});		
+		});	*/	
  	}
 	
 	@Override
