@@ -56,11 +56,11 @@ public class User implements Parcelable {
 	protected String mLastName;
 	protected String mMobile;
 	protected Date mDateOfBirth;
-	protected boolean mIsDateofBirthPublic;
+	protected Boolean mIsDateofBirthPublic;
 	protected String mStatus;
-	protected boolean mIsStatusChanged;
+	protected Boolean mIsStatusChanged;
 	protected String mSex;
-	protected boolean mIsSexPublic;
+	protected Boolean mIsSexPublic;
 	protected String mProfilePictureURL;
 	protected Bitmap mProfilePicture;
 	protected Location mLocation;
@@ -72,8 +72,8 @@ public class User implements Parcelable {
 	protected String mEducationStudy;
 	protected String mEducationCollege;
 	protected String mInterests;
-	protected boolean mIsFirstTime;
-	protected boolean mIsFacebookConnect;
+	protected Boolean mIsFirstTime;
+	protected Boolean mIsFacebookConnect;
 	protected String mFBProfilePictureURL;	
 	protected ArrayList<Long> mFavorites = new ArrayList<Long>();
 	
@@ -170,13 +170,13 @@ public class User implements Parcelable {
     public User(JSONObject jsonObject) throws JSONException {
     	this.setId(jsonObject.getLong("id"));
 		
-    	JSONObject user = jsonObject.getJSONObject("user");
-		if (!user.isNull("first_name")) {
-			this.setFirstName(user.getString("first_name"));
+    	//JSONObject user = jsonObject.getJSONObject("user");
+		if (!jsonObject.isNull("first_name")) {
+			this.setFirstName(jsonObject.getString("first_name"));
 		}
 		
-		if (!user.isNull("last_name")) {
-			this.setLastName(user.getString("last_name"));
+		if (!jsonObject.isNull("last_name")) {
+			this.setLastName(jsonObject.getString("last_name"));
 		}
 		
 		if (!jsonObject.isNull("profile_picture_url")) {
@@ -195,7 +195,7 @@ public class User implements Parcelable {
 		}
 		
 		if (!jsonObject.isNull("is_status_changed")) {
-			this.setStatusChanged(jsonObject.getBoolean("is_status_changed"));
+			this.setStatusChanged(booleanConverter(jsonObject.getString("is_status_changed")));
 		}
 		
 		if (!jsonObject.isNull("relationship_status")) {
@@ -236,7 +236,8 @@ public class User implements Parcelable {
 		}
 		
 		if (!jsonObject.isNull("is_date_of_birth_public")) {
-			this.setDateofBirthPublic(jsonObject.getBoolean("is_date_of_birth_public"));
+			
+			this.setDateofBirthPublic(booleanConverter(jsonObject.getString("is_date_of_birth_public")));
 		}
 		
 		if (!jsonObject.isNull("gender")) {
@@ -244,7 +245,7 @@ public class User implements Parcelable {
 		}
 		
 		if (!jsonObject.isNull("is_gender_public")) {
-			this.setSexPublic(jsonObject.getBoolean("is_gender_public"));
+			this.setSexPublic(booleanConverter(jsonObject.getString("is_gender_public")));
 		}
 		
 		// Set mLocation
@@ -958,7 +959,7 @@ public class User implements Parcelable {
 	}
 
 	public boolean isFacebookConnect() {
-		return mIsFacebookConnect;
+		return mIsFacebookConnect == null ? false : true;
 	}
 
 	public void setFacebookConnect(boolean isFacebookConnect) {
@@ -1229,5 +1230,8 @@ public class User implements Parcelable {
 		this.mDistance = mDistance;
 	}
 	
+	private Boolean booleanConverter(String str){
+		return "1".equals(str) || "true".equalsIgnoreCase(str);
+	}
 	
 }

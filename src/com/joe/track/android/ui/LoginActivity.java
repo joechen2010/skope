@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import com.joe.track.android.R;
 import com.joe.track.android.application.TrackApplication;
 import com.joe.track.android.application.User;
+import com.joe.track.android.entity.UserPhoneInfo;
 import com.joe.track.android.http.CustomHttpClient;
 import com.joe.track.android.http.CustomHttpClient.RequestMethod;
 import com.joe.track.android.util.APIAction;
@@ -53,6 +56,7 @@ public class LoginActivity extends BaseActivity {
 		// Read username and password from shared preferences
 		mUsername = mPreferences.getString(TrackApplication.PREFS_USERNAME, "");
 		mPassword = mPreferences.getString(TrackApplication.PREFS_PASSWORD, "");
+		
 		
 		// load up the layout
 		setContentView(R.layout.login);
@@ -139,14 +143,14 @@ public class LoginActivity extends BaseActivity {
 		
 		// Set up HTTP client with url as argument
         CustomHttpClient client = new CustomHttpClient(loginUrl);
-        client.setUseBasicAuthentication(false);
+        client.setUseBasicAuthentication(true);
         client.setUsernamePassword(username, password);
         try {
         	int versionCode = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA).versionCode;
 			client.addParam("version_code", String.valueOf(versionCode));
 			client.addParam("action", APIAction.LOGIN.getName());
-			client.addParam("username", username);
-			client.addParam("password", password);
+			//client.addParam("username", username);
+			//client.addParam("password", password);
 		} catch (NameNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

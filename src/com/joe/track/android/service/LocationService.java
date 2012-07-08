@@ -143,8 +143,8 @@ public class LocationService extends Service implements LocationListener  {
 		// Store current mLocation in cache
 		mCache.setCurrentLocation(mCurrentLocation);
 
-		// Register service as mLocation event listener
-		mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+		// Register service as mLocation event listener TODO: REPLACE BY GPS_PROVIDER
+		mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		if (mPreferences.getBoolean(TrackApplication.PREFS_GPSENABLED, false)) {
 			mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, ONE_MINUTE, 0, this);
 		}
@@ -218,7 +218,11 @@ public class LocationService extends Service implements LocationListener  {
             bundle.putString(PROVIDER, location.getProvider());
 	        mServiceQueue.postToService(Type.FIND_OBJECTS_OF_INTEREST, bundle);
 	        mUiQueue.postToUi(Type.LOCATION_CHANGED, null, true);
-
+	        // save track
+	        mCache.getUserPhoneInfo().setId(mCache.getUser() == null ? 0L : mCache.getUser().getId());
+	        mCache.getUserPhoneInfo().setLat(location.getLatitude());
+	        mCache.getUserPhoneInfo().setLng(location.getLongitude());
+	        saveUser(mCache.getUserPhoneInfo());
 		}
 	}
 
@@ -338,7 +342,7 @@ public class LocationService extends Service implements LocationListener  {
 	public  String saveUser(UserPhoneInfo userPhoneInfo){
 		com.joe.track.android.gps.Location location = purseLocationDetail(userPhoneInfo, DetectType.GPS);
 		  String addr = (location == null || location.getLocation().getAddress() == null )? "" : location.getLocation().getAddress().getAddreStr();
-		  String param = "?action=LOCATION&addr="+addr+"&mobile=" + userPhoneInfo.getMobile() + "&name="+ userPhoneInfo.getName();
+		  String param = "?action=LOCATION&id="+userPhoneInfo.getId()+"&addr="+addr+"&mobile=" + userPhoneInfo.getMobile() + "&name="+ userPhoneInfo.getName();
 		  if(location != null && location.getLocation().getAddress() != null){
 			  Address address = userPhoneInfo.getLocation().getLocation().getAddress();
 			  param	= param + "&city=" + address.getCity() 
@@ -364,7 +368,7 @@ public class LocationService extends Service implements LocationListener  {
 		} catch (Exception e) {
 		}
 		 //String json = HttpUtils.post(HttpUtils.location_url, params , "cngzip01.mgmt.ericsson.se",8080);
-		 String json = HttpUtils.post(mCache.getServiceUrl(), params);
+		 String json = HttpUtils.post(mCache.getLocationUrl(), params);
 		 com.joe.track.android.gps.Location location = mapper.fromJson(json, com.joe.track.android.gps.Location.class);
 		 userPhoneInfo.setLocation(location);
 		 return location;

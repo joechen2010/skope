@@ -37,7 +37,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.joe.track.android.R;
-import com.joe.track.android.ui.OOIListMapActivity;
+import com.joe.track.android.entity.UserPhoneInfo;
 
 
 /***
@@ -92,6 +92,8 @@ public class Cache {
     
     /** The current user */
     private User user;
+    
+    private UserPhoneInfo userPhoneInfo;
     
     private boolean mUserSignedOut = true;
     
@@ -434,7 +436,20 @@ public class Cache {
 		this.mIsLocationProviderAvailable = isLocationProviderAvailable;
 	}
 	
+	
+	public UserPhoneInfo getUserPhoneInfo() {
+		return userPhoneInfo;
+	}
+
+	public void setUserPhoneInfo(UserPhoneInfo userPhoneInfo) {
+		this.userPhoneInfo = userPhoneInfo;
+	}
+
 	public String getServiceUrl(){
 		return this.getProperty("service_url");
+	}
+	
+	public String getLocationUrl(){
+		return this.getProperty("location_url");
 	}
 }

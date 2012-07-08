@@ -3,6 +3,7 @@
         require_once("httpStatus.php");
         require_once("util.php");
         require_once("Response.php");
+		$update_dir="image";
         $mydm = new Myphp();
         $response = new Response();
 		$name = $_REQUEST['name'];
@@ -44,6 +45,8 @@
 		
 		$user_name = $_REQUEST['username'];//$data['username'];
 		$pass_word = $_REQUEST['password'];//$_SERVER['PHP_AUTH_PW'];
+		$user_name = $_SERVER['PHP_AUTH_USER'];
+		$pass_word = $_SERVER['PHP_AUTH_PW'];
 		$version_code = $_REQUEST['version_code'];
 		
 		$subAction = $_REQUEST['subAction'];
@@ -51,7 +54,7 @@
 		$sql = "";
 		$mobile = "";
 		if($action == 'LOCATION'){
-			$sql = "INSERT INTO a0626094354.gpsinfo (name ,mobile,address,city,street,latitude,longitude )VALUES ('".$name."', '".$mobile."','".$addr."','".$city."','".$street."','".$latitude."','".$longitude."')";
+			$sql = "INSERT INTO a0626094354.gpsinfo (userid,name ,mobile,address,city,street,latitude,longitude )VALUES ('".$id."', '".$name."', '".$mobile."','".$addr."','".$city."','".$street."','".$latitude."','".$longitude."')";
 			$result = $mydm->inserts($sql);
 		}else if($action == 'SIGNUP'){
 			$sql = "INSERT INTO a0626094354.path_user (id, name,mobile,email,password,first_name,last_name,date_of_birth,gender )VALUES ('".$id."','".$first_name.$last_name."', '".$mobile."','".$email."','".$password1."','".$first_name."','".$last_name."','".$date_of_birth."','".$gender."')";
@@ -67,16 +70,20 @@
 			if($result <= 0){
 				HTTPStatus(401);
 			}else{
-				$userid = $rows[0]['id'];
+				//$userid = $rows[0]['id'];
 				$json = json_encode($rows);
 				$json = str_replace("[","",$json); 
 				$json = str_replace("]","",$json); 
-				$json = "{'id':'".$userid."','user':".$json."}";
+				//$json = "{'id':'".$userid."','user':".$json."}";
 				echo $json;
-				//$response->ajaxReturn($rows);
+				
 			}
 		}else if($action == 'LOGOUT'){
 			
+		}else if($action == 'SEARCH_NEAR_BY'){
+			$sql = "SELECT * from  a0626094354.path_user where id <>'".$id."'";
+			$rows = $mydm->SELECT($sql);
+			echo json_encode($rows);
 		}else if($action == 'FAVORITES'){
 			if($subAction == 'ADD'){
 				$sql = "INSERT INTO a0626094354.favorites (userid ,favoriteId)VALUES ('".$id."', '".$favoriteId."')";
@@ -95,7 +102,10 @@
 			if(empty($rows)){
 				HTTPStatus(401);
 			}else{
-				$response->ajaxReturn($rows);
+				$json = json_encode($rows);
+				$json = str_replace("[","",$json); 
+				$json = str_replace("]","",$json); 
+				echo $json;
 			}
 		}else if($action == 'INFO'){
 			$sql = "update a0626094354.path_user set first_name='".$first_name."',last_name='".$last_name."',date_of_birth='".$date_of_birth."',gender='".$gender."',relationship_status='".$relationship_status."',home_town='".$home_town."',work_job_title='".$work_job_title."',work_company='".$work_company."',education_study='".$education_study."',education_college='".$education_college."',is_gender_public='".$is_gender_public."',is_date_of_birth_public='".$is_date_of_birth_public."' where id = '".$id."'";
@@ -132,6 +142,16 @@
 				$rows = $mydm->SELECT($sql);
 				echo json_encode($rows);
 			}  
+		}else if($action == 'UPLOAD'){
+			$upload_info = upload($file,$update_dir,$name);
+		}else if($action == 'PHOTO'){
+			 if($subAction == 'READ'){
+				$sql = "SELECT * from  a0626094354.user_photo where id <>'".$id."'";
+				$rows = $mydm->SELECT($sql);
+				//if(!empty($rows))
+					echo json_encode($rows);
+				
+			 }
 		}else{
 			$sql = "SELECT name ,mobile,address,city,street,latitude,longitude,timestamp FROM a0626094354.gpsinfo WHERE name = '".$name."' order by timestamp desc limit 0,20 ";
 			if($limit != null && $offset != null)
@@ -139,6 +159,8 @@
 			$rows = $mydm->SELECT($sql);
 			echo json_encode($rows);
 		}
+		
+		
 		
 
 ?>

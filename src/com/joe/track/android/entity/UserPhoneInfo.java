@@ -4,6 +4,7 @@ import com.joe.track.android.gps.Location;
 
 public class UserPhoneInfo {
 	
+	private Long id;
 	private Location location = new Location();;
 	private String mobile = "";
 	private String name = "";
@@ -74,6 +75,12 @@ public class UserPhoneInfo {
 	}
 	public void setBssid(String bssid) {
 		this.bssid = bssid;
+	}
+	public Long getId() {
+		return id == null ? 0L : id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	

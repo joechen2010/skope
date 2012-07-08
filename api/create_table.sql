@@ -71,7 +71,18 @@ CREATE TABLE favorites
 ) ENGINE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
 ;
 
-
+CREATE TABLE user_photo
+(
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  userid BIGINT,               
+  username varchar(50),       
+  photo_url varchar(50),    
+  thumbnail_url  varchar(50),   
+  location   varchar(50), 
+  location_timestamp timestamp DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_favorites_id (id ASC)
+) ENGINE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+;
 
 
 

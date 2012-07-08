@@ -19,7 +19,11 @@ package com.joe.track.android.application;
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
 
+import com.joe.track.android.entity.UserPhoneInfo;
+
 import android.app.Application;
+import android.content.Context;
+import android.telephony.TelephonyManager;
 
 @ReportsCrashes(formKey = "dHd6ZTBRRnpjV2pTMzh4QnN1RUJMRmc6MQ")
 
@@ -132,8 +136,22 @@ public class TrackApplication extends Application {
     @Override
     public void onCreate() {
         // The following line triggers the initialization of ACRA
-        ACRA.init(this);
+        //ACRA.init(this);
         super.onCreate();
+        setupBasicInfo();
     }
     
+    
+    private void setupBasicInfo(){
+    	TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+		/*GsmCellLocation gcl = (GsmCellLocation) tm.getCellLocation();
+		int cid = gcl.getCid();
+		int lac = gcl.getLac();
+		int mcc = Integer.valueOf(tm.getNetworkOperator().substring(0,		3));
+		int mnc = Integer.valueOf(tm.getNetworkOperator().substring(3,	5));*/
+		UserPhoneInfo userPhoneInfo = new UserPhoneInfo();
+		userPhoneInfo.setMobile(tm.getLine1Number());
+		//userPhoneInfo.setName(this.getCache().getUser().getFirstName());
+		getCache().setUserPhoneInfo(userPhoneInfo);
+    }
 }

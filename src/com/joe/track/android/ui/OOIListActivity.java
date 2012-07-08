@@ -73,10 +73,10 @@ public class OOIListActivity extends BaseActivity {
 			statusEditText.setFilters(FilterArray);
 			
 	        new AlertDialog.Builder(OOIListActivity.this)
-	        .setTitle("Update Status")
+	        .setTitle("个人签名")
 	        //.setMessage("Including hash tags (#) will allow you to filter the results by tag")
 	        .setView(statusEditText)
-	        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+	        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
 	            public void onClick(DialogInterface dialog, int whichButton) {
 	            	TextView nameTextView = (TextView) v.findViewById(R.id.user_status);
 	            	getCache().getUser().setStatus(statusEditText.getText().toString());

@@ -81,7 +81,7 @@ public class UserProfileActivity extends BaseActivity {
 	
 	private ImageView mProfilePictureView;
 	private Button mEditButton;
-	private ToggleButton mFacebookConnect;
+	//private ToggleButton mFacebookConnect;
 	private View mMainProfile;
     private LayoutInflater mInflater;
     private Uri mImageUri = Uri.EMPTY;
@@ -449,7 +449,7 @@ public class UserProfileActivity extends BaseActivity {
 			update();
 
 			boolean isFacebookConnect = getCache().getUser().isFacebookConnect();
-			mFacebookConnect.setChecked(isFacebookConnect);
+			//mFacebookConnect.setChecked(isFacebookConnect);
 			if (isFacebookConnect) {
 				mFacebook.extendAccessTokenIfNeeded(this, null);
 				mProfilePictureView.setClickable(false);

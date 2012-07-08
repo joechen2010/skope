@@ -86,8 +86,8 @@
         <item>个体</item>
         <item>合作</item>
     </string-array>
-    <string name="user_gender_male">男</string>
-    <string name="user_gender_female">女</string>
+    <string name="user_gender_male">Male</string>
+    <string name="user_gender_female">Female</string>
     <string-array name="user_gender_choices">
         <item>@string/user_gender_male</item>
         <item>@string/user_gender_female</item>

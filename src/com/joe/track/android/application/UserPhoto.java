@@ -48,9 +48,9 @@ public class UserPhoto {
 	public UserPhoto(JSONObject jsonObject, Cache cache) throws JSONException {
 		mCache = cache;
 		
-		JSONObject user = jsonObject.getJSONObject("user");
-		if (!user.isNull("username")) {
-			this.setUsername(user.getString("username"));
+		//JSONObject user = jsonObject.getJSONObject("user");
+		if (!jsonObject.isNull("username")) {
+			this.setUsername(jsonObject.getString("username"));
 		}
 				
 		this.setId(jsonObject.getInt("id"));

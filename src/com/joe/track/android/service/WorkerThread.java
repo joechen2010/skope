@@ -252,6 +252,7 @@ public class WorkerThread extends Thread {
         client.addParam("lat", String.valueOf(currentLocation.getLatitude()));
         client.addParam("lng", String.valueOf(currentLocation.getLongitude()));
         client.addParam("status_message", mCache.getUser().getStatus());
+        client.addParam("id", mCache.getUser().getId().toString());
         client.addParam("action", APIAction.SEARCH_NEAR_BY.getName());
         // Send HTTP request to web service
         try {
